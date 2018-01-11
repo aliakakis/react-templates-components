@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import IfComponent from "./if.component";
 
 export default class ConditionalComponent extends Component {
 

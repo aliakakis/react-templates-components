@@ -60,8 +60,8 @@ export default class RepeatComponent extends Component {
 
     changeValuePropsChildren = (sourceArray, reactElement = {}, iteratorItem) => {
         const { stringInterpolationIdentifier,
-            iteratorKeyIdentifier,
-            iteratorKeyGenerator } = this.props;
+                iteratorKeyIdentifier,
+                iteratorKeyGenerator } = this.props;
 
         if (sourceArray instanceof Array) {
             for (let item of sourceArray) {
@@ -116,7 +116,7 @@ export default class RepeatComponent extends Component {
 
     repeatChildren = (source) => {
         const { iterator,
-            changeValuePropsChildren } = this;
+                changeValuePropsChildren } = this;
 
         if (typeof source === 'undefined') {
             throw new SyntaxError('Please add children inside Repeat');
@@ -133,8 +133,8 @@ export default class RepeatComponent extends Component {
     render() {
         const { repeatChildren } = this;
         const { children,
-            tag,
-            className } = this.props;
+                tag,
+                className } = this.props;
         const Component = tag;
 
         return (
