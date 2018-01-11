@@ -60,8 +60,8 @@ export default class RepeatComponent extends Component {
 
     changeValuePropsChildren = (sourceArray, reactElement = {}, iteratorItem) => {
         const { stringInterpolationIdentifier,
-                iteratorKeyIdentifier,
-                iteratorKeyGenerator } = this.props;
+            iteratorKeyIdentifier,
+            iteratorKeyGenerator } = this.props;
 
         if (sourceArray instanceof Array) {
             for (let item of sourceArray) {
@@ -69,10 +69,13 @@ export default class RepeatComponent extends Component {
                     this.changeValuePropsChildren(item, {}, iteratorItem);
                 }
                 else if (React.isValidElement(item)) {
+                    item.key = new Date().getMilliseconds();
                     if (item.props.iteratorkey !== 'undefined') {
                         if (new RegExp('(' + iteratorKeyIdentifier + ')', 'g').test(item.props.iteratorkey)) {
-                            item.props.iteratorkey = iteratorKeyGenerator;
-                            item.key = iteratorKeyGenerator;
+                            item.props.iteratorkey = typeof iteratorKeyGenerator === 'undefined' ?
+                                new Date().getMilliseconds() : iteratorKeyGenerator;
+                            item.key = typeof iteratorKeyGenerator === 'undefined' ?
+                                new Date().getMilliseconds() : iteratorKeyGenerator;
                         }
                     }
                     this.changeValuePropsChildren(item.props.children, item, iteratorItem);
@@ -88,7 +91,8 @@ export default class RepeatComponent extends Component {
                         }
                     }
                     if (new RegExp('(' + iteratorKeyIdentifier + ')', 'g').test(item)) {
-                        sourceArray[sourceArray.indexOf(item)] = iteratorKeyGenerator;
+                        sourceArray[sourceArray.indexOf(item)] = typeof iteratorKeyGenerator === 'undefined' ?
+                            new Date().getMilliseconds() : iteratorKeyGenerator;
                     }
                 }
             }
@@ -104,14 +108,15 @@ export default class RepeatComponent extends Component {
                 }
             }
             if ( new RegExp('(' + iteratorKeyIdentifier + ')', 'g').test(sourceArray)) {
-                reactElement.props.children = iteratorKeyGenerator;
+                reactElement.props.children = typeof iteratorKeyGenerator === 'undefined' ?
+                    new Date().getMilliseconds() : iteratorKeyGenerator;
             }
         }
     };
 
     repeatChildren = (source) => {
         const { iterator,
-                changeValuePropsChildren } = this;
+            changeValuePropsChildren } = this;
 
         if (typeof source === 'undefined') {
             throw new SyntaxError('Please add children inside Repeat');
@@ -128,8 +133,8 @@ export default class RepeatComponent extends Component {
     render() {
         const { repeatChildren } = this;
         const { children,
-                tag,
-                className } = this.props;
+            tag,
+            className } = this.props;
         const Component = tag;
 
         return (
@@ -147,7 +152,6 @@ RepeatComponent.defaultProps = {
     className: '',
     stringInterpolationIdentifier: '@iterator',
     iteratorKeyIdentifier: '@key',
-    iteratorKeyGenerator: new Date().getMilliseconds(),
 };
 
 RepeatComponent.propTypes = {
