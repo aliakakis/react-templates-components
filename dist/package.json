@@ -1,0 +1,9 @@
+{
+  "name": "react-templates-components",
+  "version": "1.0.2",
+  "main": "react-templates-components.js",
+  "description": "Simple template based React Components",
+  "keywords": ["react", "templates"],
+  "author": "Antonios Liakakis",
+  "license": "ISC"
+}
