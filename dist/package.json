@@ -1,9 +1,16 @@
 {
   "name": "react-templates-components",
-  "version": "1.0.2",
-  "main": "react-templates-components.js",
+  "version": "1.0.4",
+  "main": "index.js",
   "description": "Simple template based React Components",
-  "keywords": ["react", "templates"],
+  "keywords": [
+    "react",
+    "templates"
+  ],
   "author": "Antonios Liakakis",
-  "license": "ISC"
+  "license": "ISC",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/aliakakis/react-templates-components"
+  }
 }
