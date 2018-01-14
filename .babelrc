@@ -2,12 +2,10 @@
     "presets": [
         ["env"],
         "stage-0",
-        "react"
+        "react",
+        "minify"
     ],
     "plugins": [
-        "transform-decorators-legacy",
-        "transform-decorators",
-        "transform-react-inline-elements",
-        "lodash"
+        "transform-react-inline-elements"
     ]
 }

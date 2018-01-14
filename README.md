@@ -128,6 +128,43 @@ Available props (see global props as well):
   * description: **depending on the 'condition' prop, it will toggle between if and else therefore the prop 'show' in if/else is
    redundant**
 
+#### ```<Cases>/<Case>``` Component 
+
+```jsx
+<Cases
+    expression={'Jack'}
+    tag="div"
+    className="custom-class"
+>
+    <Case expressionValue={'Jack'}>
+        Hi Jack
+    </Case>
+    <Case expressionValue={'John'}>
+        Hi John
+    </Case>
+    <Case expressionValue={'Jim'}>
+        Hi Jim 
+    </Case>
+    <Case expressionValue={'Jason'}>
+        Hi Jason
+    </Case>
+    <Case expressionValue={'default'}>
+        Default
+    </Case>
+</Cases>
+```
+
+Available props for ```<Cases>``` (see global props as well):
+* **condition**
+  * expression: **any**
+  * description: **The expression to evaluate**
+  
+Available props for ```<Case>``` (see global props as well):
+* **condition**
+  * expressionValue: **any**
+  * description: **The expressionValue to evaluate with the expression in the ```<Cases>``` component**
+
+
 #### ```<Repeat>``` Component 
 
 ```jsx
