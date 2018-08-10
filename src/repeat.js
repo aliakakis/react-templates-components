@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default class RepeatComponent extends Component {
+export default class Repeat extends Component {
 
     constructor(props) {
         super(props);
@@ -147,14 +147,14 @@ export default class RepeatComponent extends Component {
     };
 }
 
-RepeatComponent.defaultProps = {
+Repeat.defaultProps = {
     tag: 'div',
     className: '',
     stringInterpolationIdentifier: '@iterator',
     iteratorKeyIdentifier: '@key',
 };
 
-RepeatComponent.propTypes = {
+Repeat.propTypes = {
     iterator: PropTypes.oneOfType([
         PropTypes.array,
         PropTypes.number,

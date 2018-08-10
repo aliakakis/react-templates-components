@@ -1,8 +1,8 @@
-import Conditional from './conditional.component';
-import If from './if.component';
-import Else from './else.component';
-import Repeat from './repeat.component';
-import Cases, { Case } from './cases.component';
+import Conditional from './conditional';
+import If from './if';
+import Else from './else';
+import Repeat from './repeat';
+import Cases, { Case } from './cases';
 
 export {
     Conditional,

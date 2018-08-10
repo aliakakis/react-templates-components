@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default class ConditionalComponent extends Component {
+export default class Conditional extends Component {
 
     constructor(props) {
         super(props);
@@ -30,13 +30,13 @@ export default class ConditionalComponent extends Component {
     };
 }
 
-ConditionalComponent.defaultProps = {
+Conditional.defaultProps = {
     condition: true,
     tag: 'div',
     className: '',
 };
 
-ConditionalComponent.propTypes = {
+Conditional.propTypes = {
     condition: PropTypes.bool.isRequired,
     tag: PropTypes.string,
     className: PropTypes.string,

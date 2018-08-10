@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default class IfComponent extends Component {
+export default class If extends Component {
 
     constructor(props) {
         super(props);
@@ -22,13 +22,13 @@ export default class IfComponent extends Component {
     };
 }
 
-IfComponent.defaultProps = {
+If.defaultProps = {
     show: true,
     tag: 'div',
     className: '',
 };
 
-IfComponent.propTypes = {
+If.propTypes = {
     show: PropTypes.bool,
     tag: PropTypes.string,
     className: PropTypes.string,

@@ -1,0 +1,6 @@
+yarn-error.log
+.idea/
+node_modules/
+.cache/
+bower_components/
+build/

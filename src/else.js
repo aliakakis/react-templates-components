@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default class ElseComponent extends Component {
+export default class Else extends Component {
 
     constructor(props) {
         super(props);
@@ -22,13 +22,13 @@ export default class ElseComponent extends Component {
     };
 }
 
-ElseComponent.defaultProps = {
+Else.defaultProps = {
     show: true,
     tag: 'div',
     className: '',
 };
 
-ElseComponent.propTypes = {
+Else.propTypes = {
     show: PropTypes.bool,
     tag: PropTypes.string,
     className: PropTypes.string,
