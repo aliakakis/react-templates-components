@@ -15,7 +15,7 @@ form of React components.
 
 
 
-### Prerequisites
+### Prerequisites if building from source
 
 You should have an installation of NodeJS any version and npm or yarn
 
