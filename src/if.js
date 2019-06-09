@@ -1,35 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class If extends Component {
+export default function If(props) {
+    const { children,
+            show,
+            tag,
+            className } = props;
 
-    constructor(props) {
-        super(props);
-    }
+    const Component = tag;
 
-    render() {
-        const { children,
-                show,
-                tag,
-                className } = this.props;
-        const Component = tag;
-
-        return (
-            show && <Component className={className}>
-                {children}
-            </Component>
-        );
-    };
+    return (
+        show && <Component className={className}>
+            {children}
+        </Component>
+    );
 }
 
 If.defaultProps = {
     show: true,
     tag: 'div',
-    className: '',
+    className: ''
 };
 
 If.propTypes = {
     show: PropTypes.bool,
     tag: PropTypes.string,
-    className: PropTypes.string,
+    className: PropTypes.string
 };

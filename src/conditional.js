@@ -1,43 +1,35 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Conditional extends Component {
+export default function Conditional(props) {
+    const { children,
+            condition,
+            tag,
+            className } = props;
 
-    constructor(props) {
-        super(props);
+    const Component = tag;
 
-        const { children } = props;
-
-        if (React.Children.count(children) < 2) {
-            throw new SyntaxError('You must include an If component and an Else component');
-        }
+    if (React.Children.count(children) < 2) {
+        throw new SyntaxError('You must include an If component and an Else component');
     }
 
-    render() {
-        const { children,
-                condition,
-                tag,
-                className } = this.props;
-        const Component = tag;
-
-        return (
-            <Component className={className}>
-                {
-                    condition ? children[0] : children[1]
-                }
-            </Component>
-        );
-    };
+    return (
+        <Component className={className}>
+            {
+                condition ? children[0] : children[1]
+            }
+        </Component>
+    );
 }
 
 Conditional.defaultProps = {
     condition: true,
     tag: 'div',
-    className: '',
+    className: ''
 };
 
 Conditional.propTypes = {
     condition: PropTypes.bool.isRequired,
     tag: PropTypes.string,
-    className: PropTypes.string,
+    className: PropTypes.string
 };

@@ -1,35 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Else extends Component {
+export default function Else(props) {
+    const { children,
+            show,
+            tag,
+            className } = props;
 
-    constructor(props) {
-        super(props);
-    }
+    const Component = tag;
 
-    render() {
-        const { children,
-                show,
-                tag,
-                className } = this.props;
-        const Component = tag;
-
-        return (
-            show && <Component className={className}>
-                {children}
-            </Component>
-        );
-    };
+    return (
+        show && <Component className={className}>
+            {children}
+        </Component>
+    );
 }
 
 Else.defaultProps = {
     show: true,
     tag: 'div',
-    className: '',
+    className: ''
 };
 
 Else.propTypes = {
     show: PropTypes.bool,
     tag: PropTypes.string,
-    className: PropTypes.string,
+    className: PropTypes.string
 };
