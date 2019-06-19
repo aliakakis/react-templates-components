@@ -4,4 +4,4 @@ node_modules/
 .cache/
 bower_components/
 build/
-dist_test/
+.cache/

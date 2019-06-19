@@ -1,0 +1,26 @@
+{
+  "name": "@aliakakis/react-templates-components",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Simple template based React Components",
+  "dependencies": {
+    "@types/react": "^16.8.20",
+    "@types/react-dom": "^16.8.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "tslib": "^1.10.0",
+    "typescript": "^3.5.2"
+  },
+  "keywords": [
+    "react",
+    "templates"
+  ],
+  "scripts": {
+    "build": "parcel build src/index.tsx --no-source-maps --experimental-scope-hoisting"
+  },
+  "author": "Antonios Liakakis",
+  "license": "ISC"
+}
