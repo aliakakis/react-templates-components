@@ -47,7 +47,7 @@ function getNestedObjectValue(obj: GenericObject, path: string) {
 }
 
 function changeValuePropsChildren(source: any, reactElement: GenericObject = {}, iteratorItem: any, props: Props) {
-    const { stringInterpolationIdentifier } = props;
+    const { stringInterpolationIdentifier, useRandomKeyForIteration } = props;
 
     if (source instanceof Array) {
         for (let item of source) {
@@ -60,6 +60,10 @@ function changeValuePropsChildren(source: any, reactElement: GenericObject = {},
                 if (new RegExp('(' + stringInterpolationIdentifier + ')', 'g').test(element.key)) {
                     if (element.key.split(stringInterpolationIdentifier + '.').length > 1) {
                         element.key = getNestedObjectValue(iteratorItem, element.key.split(stringInterpolationIdentifier + '.')[1]);
+                    }
+                } else {
+                    if (useRandomKeyForIteration && element.key === null) {
+                        element.key = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
                     }
                 }
 
@@ -130,7 +134,8 @@ export default function Repeat(props: Props) {
 Repeat.defaultProps = {
     tag: 'div',
     className: '',
-    stringInterpolationIdentifier: '@iterator'
+    stringInterpolationIdentifier: '@iterator',
+    useRandomKeyForIteration: true
 };
 
 Repeat.propTypes = {
@@ -140,5 +145,6 @@ Repeat.propTypes = {
     ]).isRequired,
     tag: PropTypes.string,
     className: PropTypes.string,
-    stringInterpolationIdentifier: PropTypes.string
+    stringInterpolationIdentifier: PropTypes.string,
+    useRandomKeyForIteration: PropTypes.bool
 };
