@@ -11,9 +11,20 @@ React components tend to become un-readable with two main issues affecting reada
 In order to reduce boilerplate this library is introducing components that act like a DSL template language but in the 
 form of React components.
 
+## v2.0.0 Important information
+
+When I started building this library I used JavaScript. However, I am the first to admit that TypeScript is starting
+to grow in me. This update bring the following changes:
+
+- TypeScript re-write
+- Functional components in order to be ready for the class based deprecation React will eventually bring upon us
+- ParcelJS for building from source. I cannot stress how much faster and easier it was and the minified size in also smaller
+- Repeat component has made some "hasty" assumptions about the key prop. New version and props are found in the documentation below
+
+I would like to apologize to anyone that is using this package and hope that any breaking changes are easy and fast to refactor.
+As always please do not hesitate to contact me in case you found a bug. 
+
 ## Getting Started
-
-
 
 ### Prerequisites if building from source
 
@@ -21,7 +32,7 @@ You should have an installation of NodeJS any version and npm or yarn
 
 More over React and PropTypes are MANDATORY for the components to work.
 
-Babel with presets "env", "stage-0" and "react" is also a dependency.
+If you want to build from source by including them in your project, please take a look at my tsconfig.json since v2.0.0 is using TypeScript.
 
 These components are using React features that were present from the early stages of the library therefore you should not
 encounter any issues. Nevertheless, I do suggest a version of React 15+
@@ -38,10 +49,7 @@ Yarn:
 yarn add react-templates-components
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
 ## Usage
-
 
 #### Global props
 **_The following props are available for all components:_**
@@ -169,12 +177,12 @@ Available props for ```<Case>``` (see global props as well):
 
 ```jsx
 <Repeat iterator={[{id: 'One', name: 'John'}, {id: 'Two', name: 'Jack'}, {id: 'Three', name: 'Jim'}]}>
-    <div iteratorkey="@key">
-        {'@iterator.name'}
-        <div>{'@iterator.id'}{'@key'}</div>
-    </div>
-    <div>HI REPEAT #2</div>
-    HI REPEAT #3 {'@iterator.name'}
+  <div key={8}>
+    {'@iterator.name'}
+    <div key={'@iterator.id'}>{'@iterator.id'}</div>
+  </div>
+  <div>HI REPEAT #2</div>
+  HI REPEAT #3 {'@iterator.name'}
 </Repeat>
 ```
 
@@ -187,14 +195,12 @@ Available props (see global props as well):
   * type: **string**
   * default: **"@iterator"**
   * description: **Change the default identifier for when applying the value of each element with {'@iterator'} inside JSX from the Array**
-* **iteratorKeyIdentifier**
-  * type: **string**
-  * default: **"@key"**
-  * description: **Change the default identifier for when you want to render the key prop found in every React element**
-* **iteratorKeyGenerator**
-  * type: **any**
-  * default: **none**
-  * description: **In case you want to create a unique identifier then use this prop otherwise the default behavior is Date().getMilliseconds()**  
+* **useRandomKeyForIteration**
+  * type: **Boolean**
+  * default: **true**
+  * description: **This will create a random hash based key for every React component or tag passed as children. 
+                   NOTE: If you have already set the key prop then your key will be used instead.
+                   You can disable this feature but it is not recommended.**
   
 > **If you want to pass the value of each element of an Array you _have_ to use the keyword '@iterator' as seen in the example above.
  This example uses an Array of objects therefore you pass the dot annotation to apply the value you want. in case there was 
