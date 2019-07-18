@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Props } from "./interfaces/component";
 
-export default function Conditional(props) {
+export default function Conditional(props: Props) {
     const { children,
             condition,
             tag,

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { GenericObject } from "./interfaces/global";
+import { Props } from "./interfaces/component";
 
-export function Case(props) {
+export function Case(props: Props) {
     const { children } = props;
 
     return children;
@@ -11,7 +13,7 @@ Case.propTypes = {
     expressionValue: PropTypes.any.isRequired
 };
 
-export default function Cases(props) {
+export default function Cases(props: Props) {
     const { children,
             condition,
             expression,
@@ -27,7 +29,7 @@ export default function Cases(props) {
     }
 
     if (React.Children.count(children) > 2) {
-        let filteredArrayElement = children.filter((childItem) => {
+        let filteredArrayElement = children.filter((childItem: GenericObject) => {
             return childItem.props.expressionValue === expression;
         });
 

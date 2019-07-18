@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Props } from "./interfaces/component";
 
-export default function Else(props) {
+export default function Else(props: Props) {
     const { children,
             show,
             tag,

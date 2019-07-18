@@ -10,5 +10,5 @@ export {
     Else,
     Repeat,
     Cases,
-    Case,
+    Case
 };
