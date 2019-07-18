@@ -21,8 +21,10 @@ to grow in me. This update bring the following changes:
 - ParcelJS for building from source. I cannot stress how much faster and easier it was and the minified size in also smaller
 - Repeat component has made some "hasty" assumptions about the key prop. New version and props are found in the documentation below
 
+### Thoughts
+
 I would like to apologize to anyone that is using this package and hope that any breaking changes are easy and fast to refactor.
-As always please do not hesitate to contact me in case you found a bug. 
+As always, please do not hesitate to contact me in case you find a bug. 
 
 ## Getting Started
 
