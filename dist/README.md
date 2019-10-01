@@ -11,6 +11,13 @@ React components tend to become un-readable with two main issues affecting reada
 In order to reduce boilerplate this library is introducing components that act like a DSL template language but in the 
 form of React components.
 
+## v2.1.1 Release Information
+
+- Added 'useFragment' prop for all components, in case you do not want that extra HTML element added to the DOM. 
+
+**Please not that in case you set 'useFragment' to true the 'tag' and/or 'className' props will not have any effect on the component. Therefore if you have styled 
+the HTML element used in the 'tag' prop, you will get weird styling results.**
+
 ## v2.0.0 Important information
 
 When I started building this library I used JavaScript. However, I am the first to admit that TypeScript is starting
@@ -64,6 +71,12 @@ yarn add react-templates-components
   * type: **string**
   * default: **" "**
   * description: **The usual value found in all React components that translate to class**
+* **useFragment**
+  * type: **boolean**
+  * default: **false**
+  * description: **The component will use the 'React.Fragment' component. 
+  _Please not that in case you set 'useFragment' to true the 'tag' and/or 'className' props will not have any effect on the component. 
+  Therefore if you have styled the HTML element used in the 'tag' prop, you will get weird styling results._**
 
 #### Components
 The following components props are available
