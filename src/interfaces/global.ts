@@ -1,3 +1,3 @@
 export interface GenericObject {
-    [key: string]: any
+  [key: string]: any;
 }
