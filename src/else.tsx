@@ -5,10 +5,13 @@ import { Props } from "./interfaces/component";
 export default function Else(props: Props) {
   const { children, show, tag: Component, className, useFragment } = props;
 
-  return show && useFragment ? (
-    <Fragment>{children}</Fragment>
-  ) : (
-    <Component className={className}>{children}</Component>
+  return (
+    show &&
+    (useFragment ? (
+      <Fragment>{children}</Fragment>
+    ) : (
+      <Component className={className}>{children}</Component>
+    ))
   );
 }
 
