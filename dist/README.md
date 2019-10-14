@@ -224,4 +224,3 @@ Available props (see global props as well):
 ## License
 
 This project is licensed under the MIT License
-
