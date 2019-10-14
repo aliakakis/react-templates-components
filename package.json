@@ -4,17 +4,17 @@
   "main": "index.js",
   "description": "Simple template based React Components",
   "dependencies": {
-    "@types/node": "^12.7.8",
-    "@types/react": "^16.8.20",
-    "@types/react-dom": "^16.8.4",
+    "@types/node": "^12.7.12",
+    "@types/react": "^16.9.6",
+    "@types/react-dom": "^16.9.2",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
   },
   "devDependencies": {
     "prettier": "^1.18.2",
     "tslib": "^1.10.0",
-    "typescript": "^3.5.2"
+    "typescript": "^3.6.4"
   },
   "keywords": [
     "react",
