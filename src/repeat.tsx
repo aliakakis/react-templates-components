@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { GenericObject } from "./interfaces/global";
 import { Props } from "./interfaces/component";
 
-function cloneDeep(source: any): any {
+const cloneDeep = (source: any): any => {
   if (source instanceof Array) {
     const cloneArray: any[] = [];
     for (let item of source) {
@@ -31,22 +31,22 @@ function cloneDeep(source: any): any {
     }
     return cloneObject;
   }
-}
+};
 
-function getNestedObjectValue(obj: GenericObject, path: string) {
+const getNestedObjectValue = (obj: GenericObject, path: string) => {
   const deep = path.split(".");
   for (let value of deep) {
     obj = obj[value];
   }
   return obj;
-}
+};
 
-function changeValuePropsChildren(
+const changeValuePropsChildren = (
   source: any,
   reactElement: GenericObject = {},
   iteratorItem: any,
   props: Props
-) {
+) => {
   const { stringInterpolationIdentifier, useRandomKeyForIteration } = props;
 
   if (source instanceof Array) {
@@ -134,13 +134,13 @@ function changeValuePropsChildren(
       }
     }
   }
-}
+};
 
-function repeatChildren(
+const repeatChildren = (
   children: GenericObject,
   iterator: any[],
   props: Props
-) {
+) => {
   if (typeof children === "undefined") {
     throw new SyntaxError("Please add children inside Repeat");
   }
@@ -151,9 +151,9 @@ function repeatChildren(
     changeValuePropsChildren(cloneChildren, {}, iteratorItem, props);
     return cloneChildren;
   });
-}
+};
 
-export default function Repeat(props: Props) {
+const Repeat = (props: Props) => {
   const { iterator, children, tag: Component, className, useFragment } = props;
 
   if (typeof iterator === "undefined") {
@@ -177,7 +177,7 @@ export default function Repeat(props: Props) {
       )}
     </Component>
   );
-}
+};
 
 Repeat.defaultProps = {
   tag: "div",
@@ -195,3 +195,5 @@ Repeat.propTypes = {
   useRandomKeyForIteration: PropTypes.bool,
   useFragment: PropTypes.bool
 };
+
+export default Repeat;

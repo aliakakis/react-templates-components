@@ -2,9 +2,13 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Props } from "./interfaces/component";
 
-export default function If(props: Props) {
-  const { children, show, tag: Component, className, useFragment } = props;
-
+const If = ({
+  children,
+  show,
+  tag: Component,
+  className,
+  useFragment
+}: Props) => {
   return (
     show &&
     (useFragment ? (
@@ -13,7 +17,7 @@ export default function If(props: Props) {
       <Component className={className}>{children}</Component>
     ))
   );
-}
+};
 
 If.defaultProps = {
   show: true,
@@ -28,3 +32,5 @@ If.propTypes = {
   className: PropTypes.string,
   useFragment: PropTypes.bool
 };
+
+export default If;

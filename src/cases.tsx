@@ -3,26 +3,20 @@ import PropTypes from "prop-types";
 import { GenericObject } from "./interfaces/global";
 import { Props } from "./interfaces/component";
 
-export function Case(props: Props) {
-  const { children } = props;
-
-  return children;
-}
+export const Case = ({ children }: Props) => children;
 
 Case.propTypes = {
   expressionValue: PropTypes.any.isRequired
 };
 
-export default function Cases(props: Props) {
-  const {
-    children,
-    condition,
-    expression,
-    tag: Component,
-    className,
-    useFragment
-  } = props;
-
+const Cases = ({
+  children,
+  condition,
+  expression,
+  tag: Component,
+  className,
+  useFragment
+}: Props) => {
   let CaseItem = null;
 
   if (React.Children.count(children) < 2) {
@@ -64,7 +58,7 @@ export default function Cases(props: Props) {
         : children[1]}
     </Component>
   );
-}
+};
 
 Cases.defaultProps = {
   tag: "div",
@@ -78,3 +72,5 @@ Cases.propTypes = {
   className: PropTypes.string,
   useFragment: PropTypes.bool
 };
+
+export default Cases;
