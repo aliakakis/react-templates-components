@@ -4,9 +4,11 @@
   "main": "index.js",
   "description": "Simple template based React Components",
   "dependencies": {
-    "@types/node": "^12.7.12",
-    "@types/react": "^16.9.6",
+    "@types/lodash-es": "^4.17.3",
+    "@types/node": "^12.11.2",
+    "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
+    "lodash-es": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
