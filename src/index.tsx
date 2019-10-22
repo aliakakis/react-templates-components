@@ -1,14 +1,5 @@
-import Conditional from './conditional';
-import If from './if';
-import Else from './else';
-import Repeat from './repeat';
-import Cases, { Case } from './cases';
-
-export {
-    Conditional,
-    If,
-    Else,
-    Repeat,
-    Cases,
-    Case
-};
+export { Conditional } from "./Conditional";
+export { If } from "./If";
+export { Else } from "./Else";
+export { Repeat } from "./Repeat";
+export { Cases, Case } from "./Cases";

@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { cloneDeep } from "lodash-es";
-import { GenericObject } from "./interfaces/global";
-import { Props } from "./interfaces/component";
+import { GenericObject } from "./interfaces/Global";
+import { Props } from "./interfaces/Component";
 
 const getNestedObjectValue = (obj: GenericObject, path: string) => {
   if (path.split(".").length > 1) {
@@ -22,7 +21,7 @@ const changeValuePropsChildren = (
   iteratorItem: any,
   props: Props
 ) => {
-  const { stringInterpolationIdentifier, useRandomKeyForIteration } = props;
+  const { stringInterpolationIdentifier } = props;
 
   if (source instanceof Array) {
     for (let item of source) {
@@ -101,33 +100,42 @@ const repeatChildren = (
     throw new SyntaxError("Please add children inside Repeat");
   }
 
-  const cloneChildren = cloneDeep(children);
+  changeValuePropsChildren(children, {}, iteratorItem, props);
 
-  changeValuePropsChildren(cloneChildren, {}, iteratorItem, props);
-
-  return cloneChildren;
+  return children;
 };
 
-const calculateKey = (setKey: string, item: any) => {
-  let key: string = "";
+const calculateKey = (
+  setKey: string,
+  item: any,
+  stringInterpolationIdentifier: string,
+  index: number
+) => {
+  let key: string | number;
 
-  if (setKey === "value") {
+  if (setKey === "index") {
+    key = index;
+  } else if (setKey === stringInterpolationIdentifier) {
     key = item;
   } else {
-    key = getNestedObjectValue(item, setKey);
+    key = getNestedObjectValue(
+      item,
+      setKey.split(stringInterpolationIdentifier + ".")[1]
+    );
   }
 
   return key;
 };
 
-const Repeat = (props: Props) => {
+export const Repeat = (props: Props) => {
   const {
     iterator,
     children,
     tag: Component,
     className,
     useFragment,
-    setKey
+    setKey,
+    stringInterpolationIdentifier
   } = props;
 
   if (typeof iterator === "undefined") {
@@ -138,16 +146,31 @@ const Repeat = (props: Props) => {
     typeof iterator === "number" ? [...new Array(iterator)] : iterator;
 
   return useFragment
-    ? iteratorSrc.map((item: any) => {
+    ? iteratorSrc.map((item: any, index: number) => {
         return (
-          <Fragment key={calculateKey(setKey, item)}>
+          <Fragment
+            key={calculateKey(
+              setKey,
+              item,
+              stringInterpolationIdentifier,
+              index
+            )}
+          >
             {repeatChildren(children, item, props)}
           </Fragment>
         );
       })
-    : iteratorSrc.map((item: any) => {
+    : iteratorSrc.map((item: any, index: number) => {
         return (
-          <Component className={className} key={calculateKey(setKey, item)}>
+          <Component
+            className={className}
+            key={calculateKey(
+              setKey,
+              item,
+              stringInterpolationIdentifier,
+              index
+            )}
+          >
             {repeatChildren(children, item, props)}
           </Component>
         );
@@ -169,5 +192,3 @@ Repeat.propTypes = {
   setKey: PropTypes.string.isRequired,
   stringInterpolationIdentifier: PropTypes.string
 };
-
-export default Repeat;
