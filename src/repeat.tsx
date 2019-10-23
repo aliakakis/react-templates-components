@@ -1,44 +1,19 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { GenericObject } from "./interfaces/global";
-import { Props } from "./interfaces/component";
-
-const cloneDeep = (source: any): any => {
-  if (source instanceof Array) {
-    const cloneArray: any[] = [];
-    for (let item of source) {
-      if (item instanceof Array) {
-        cloneArray.push(cloneDeep(item));
-      } else if (item instanceof Object) {
-        cloneArray.push(cloneDeep(item));
-      } else {
-        cloneArray.push(item);
-      }
-    }
-    return cloneArray;
-  } else if (source instanceof Object) {
-    const cloneObject: GenericObject = {};
-    for (let prop in source) {
-      if (source.hasOwnProperty(prop)) {
-        if (source[prop] instanceof Array) {
-          cloneObject[prop] = cloneDeep(source[prop]);
-        } else if (source[prop] instanceof Object) {
-          cloneObject[prop] = cloneDeep(source[prop]);
-        } else {
-          cloneObject[prop] = source[prop];
-        }
-      }
-    }
-    return cloneObject;
-  }
-};
+import cloneDeep from "lodash.clonedeep";
+import { GenericObject } from "./interfaces/Global";
+import { Props } from "./interfaces/Component";
 
 const getNestedObjectValue = (obj: GenericObject, path: string) => {
-  const deep = path.split(".");
-  for (let value of deep) {
-    obj = obj[value];
+  if (path.split(".").length > 1) {
+    const deep = path.split(".");
+    for (let value of deep) {
+      obj = obj[value];
+    }
+    return obj;
+  } else {
+    return obj[path];
   }
-  return obj;
 };
 
 const changeValuePropsChildren = (
@@ -47,39 +22,18 @@ const changeValuePropsChildren = (
   iteratorItem: any,
   props: Props
 ) => {
-  const { stringInterpolationIdentifier, useRandomKeyForIteration } = props;
+  if (typeof source === "undefined") {
+    throw new SyntaxError("Please add children inside Repeat");
+  }
+
+  const { stringInterpolationIdentifier } = props;
 
   if (source instanceof Array) {
     for (let item of source) {
       if (item instanceof Array) {
         changeValuePropsChildren(item, {}, iteratorItem, props);
-      } else if (React.isValidElement(item)) {
+      } else if (item instanceof Object) {
         const element: GenericObject = item;
-
-        if (
-          new RegExp("(" + stringInterpolationIdentifier + ")", "g").test(
-            element.key
-          )
-        ) {
-          if (
-            element.key.split(stringInterpolationIdentifier + ".").length > 1
-          ) {
-            element.key = getNestedObjectValue(
-              iteratorItem,
-              element.key.split(stringInterpolationIdentifier + ".")[1]
-            );
-          }
-        } else {
-          if (useRandomKeyForIteration && element.key === null) {
-            element.key =
-              Math.random()
-                .toString(36)
-                .substring(2, 15) +
-              Math.random()
-                .toString(36)
-                .substring(2, 15);
-          }
-        }
 
         for (let prop in element.props) {
           if (element.props.hasOwnProperty(prop) && prop !== "children") {
@@ -98,6 +52,8 @@ const changeValuePropsChildren = (
                     stringInterpolationIdentifier + "."
                   )[1]
                 );
+              } else {
+                element.props[prop] = iteratorItem;
               }
             }
           }
@@ -118,6 +74,8 @@ const changeValuePropsChildren = (
               iteratorItem,
               item.split(stringInterpolationIdentifier + ".")[1]
             );
+          } else {
+            source[source.indexOf(item)] = iteratorItem;
           }
         }
       }
@@ -127,73 +85,103 @@ const changeValuePropsChildren = (
       new RegExp("(" + stringInterpolationIdentifier + ")", "g").test(source)
     ) {
       if (source.split(stringInterpolationIdentifier + ".").length > 1) {
-        reactElement.props.children = getNestedObjectValue(
+        source = getNestedObjectValue(
           iteratorItem,
           source.split(stringInterpolationIdentifier + ".")[1]
         );
+      } else {
+        source = iteratorItem;
       }
     }
   }
+  return source;
 };
 
-const repeatChildren = (
-  children: GenericObject,
-  iterator: any[],
-  props: Props
+const calculateKey = (
+  setKey: string,
+  item: any,
+  stringInterpolationIdentifier: string,
+  index: number
 ) => {
-  if (typeof children === "undefined") {
-    throw new SyntaxError("Please add children inside Repeat");
+  let key: string | number;
+
+  if (setKey === "index") {
+    key = index;
+  } else if (setKey === stringInterpolationIdentifier) {
+    key = item;
+  } else {
+    key = getNestedObjectValue(
+      item,
+      setKey.split(stringInterpolationIdentifier + ".")[1]
+    );
   }
 
-  return iterator.map((iteratorItem: any) => {
-    const cloneChildren = cloneDeep(children);
-
-    changeValuePropsChildren(cloneChildren, {}, iteratorItem, props);
-    return cloneChildren;
-  });
+  return key;
 };
 
-const Repeat = (props: Props) => {
-  const { iterator, children, tag: Component, className, useFragment } = props;
+export const Repeat = (props: Props) => {
+  const {
+    iterator,
+    children,
+    tag: Component,
+    className,
+    useFragment,
+    setKey,
+    stringInterpolationIdentifier
+  } = props;
 
   if (typeof iterator === "undefined") {
     throw new SyntaxError("The iterator prop is mandatory");
   }
 
-  return useFragment ? (
-    <Fragment>
-      {repeatChildren(
-        children,
-        typeof iterator === "number" ? [...new Array(iterator)] : iterator,
-        props
-      )}
-    </Fragment>
-  ) : (
-    <Component className={className}>
-      {repeatChildren(
-        children,
-        typeof iterator === "number" ? [...new Array(iterator)] : iterator,
-        props
-      )}
-    </Component>
-  );
+  let iteratorProp: any[] =
+    typeof iterator === "number" ? [...new Array(iterator)] : iterator;
+
+  return useFragment
+    ? iteratorProp.map((item: any, index: number) => {
+        return (
+          <Fragment
+            key={calculateKey(
+              setKey,
+              item,
+              stringInterpolationIdentifier,
+              index
+            )}
+          >
+            {changeValuePropsChildren(cloneDeep(children), {}, item, props)}
+          </Fragment>
+        );
+      })
+    : iteratorProp.map((item: any, index: number) => {
+        return (
+          <Component
+            className={className}
+            key={calculateKey(
+              setKey,
+              item,
+              stringInterpolationIdentifier,
+              index
+            )}
+          >
+            {changeValuePropsChildren(cloneDeep(children), {}, item, props)}
+          </Component>
+        );
+      });
 };
 
 Repeat.defaultProps = {
   tag: "div",
   className: "",
-  stringInterpolationIdentifier: "@iterator",
-  useRandomKeyForIteration: true,
-  useFragment: false
+  useFragment: false,
+  setKey: "index",
+  stringInterpolationIdentifier: "@iterator"
 };
 
 Repeat.propTypes = {
   iterator: PropTypes.oneOfType([PropTypes.array, PropTypes.number]).isRequired,
   tag: PropTypes.string,
   className: PropTypes.string,
-  stringInterpolationIdentifier: PropTypes.string,
-  useRandomKeyForIteration: PropTypes.bool,
-  useFragment: PropTypes.bool
+  useFragment: PropTypes.bool,
+  setKey: PropTypes.string,
+  stringInterpolationIdentifier: PropTypes.string
 };
-
-export default Repeat;

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { GenericObject } from "./interfaces/global";
-import { Props } from "./interfaces/component";
+import { GenericObject } from "./interfaces/Global";
+import { Props } from "./interfaces/Component";
 
 export const Case = ({ children }: Props) => children;
 
@@ -9,7 +9,7 @@ Case.propTypes = {
   expressionValue: PropTypes.any.isRequired
 };
 
-const Cases = ({
+export const Cases = ({
   children,
   condition,
   expression,
@@ -72,5 +72,3 @@ Cases.propTypes = {
   className: PropTypes.string,
   useFragment: PropTypes.bool
 };
-
-export default Cases;
