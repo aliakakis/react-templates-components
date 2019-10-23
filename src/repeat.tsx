@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import cloneDeep from "lodash.clonedeep";
 import { GenericObject } from "./interfaces/Global";
 import { Props } from "./interfaces/Component";
 
@@ -21,13 +22,17 @@ const changeValuePropsChildren = (
   iteratorItem: any,
   props: Props
 ) => {
+  if (typeof source === "undefined") {
+    throw new SyntaxError("Please add children inside Repeat");
+  }
+
   const { stringInterpolationIdentifier } = props;
 
   if (source instanceof Array) {
     for (let item of source) {
       if (item instanceof Array) {
         changeValuePropsChildren(item, {}, iteratorItem, props);
-      } else if (React.isValidElement(item)) {
+      } else if (item instanceof Object) {
         const element: GenericObject = item;
 
         for (let prop in element.props) {
@@ -80,29 +85,16 @@ const changeValuePropsChildren = (
       new RegExp("(" + stringInterpolationIdentifier + ")", "g").test(source)
     ) {
       if (source.split(stringInterpolationIdentifier + ".").length > 1) {
-        reactElement.props.children = getNestedObjectValue(
+        source = getNestedObjectValue(
           iteratorItem,
           source.split(stringInterpolationIdentifier + ".")[1]
         );
       } else {
-        reactElement.props.children = iteratorItem;
+        source = iteratorItem;
       }
     }
   }
-};
-
-const repeatChildren = (
-  children: GenericObject,
-  iteratorItem: any[],
-  props: Props
-) => {
-  if (typeof children === "undefined") {
-    throw new SyntaxError("Please add children inside Repeat");
-  }
-
-  changeValuePropsChildren(children, {}, iteratorItem, props);
-
-  return children;
+  return source;
 };
 
 const calculateKey = (
@@ -142,11 +134,11 @@ export const Repeat = (props: Props) => {
     throw new SyntaxError("The iterator prop is mandatory");
   }
 
-  let iteratorSrc: any[] =
+  let iteratorProp: any[] =
     typeof iterator === "number" ? [...new Array(iterator)] : iterator;
 
   return useFragment
-    ? iteratorSrc.map((item: any, index: number) => {
+    ? iteratorProp.map((item: any, index: number) => {
         return (
           <Fragment
             key={calculateKey(
@@ -156,11 +148,11 @@ export const Repeat = (props: Props) => {
               index
             )}
           >
-            {repeatChildren(children, item, props)}
+            {changeValuePropsChildren(cloneDeep(children), {}, item, props)}
           </Fragment>
         );
       })
-    : iteratorSrc.map((item: any, index: number) => {
+    : iteratorProp.map((item: any, index: number) => {
         return (
           <Component
             className={className}
@@ -171,7 +163,7 @@ export const Repeat = (props: Props) => {
               index
             )}
           >
-            {repeatChildren(children, item, props)}
+            {changeValuePropsChildren(cloneDeep(children), {}, item, props)}
           </Component>
         );
       });
@@ -181,6 +173,7 @@ Repeat.defaultProps = {
   tag: "div",
   className: "",
   useFragment: false,
+  setKey: "index",
   stringInterpolationIdentifier: "@iterator"
 };
 
@@ -189,6 +182,6 @@ Repeat.propTypes = {
   tag: PropTypes.string,
   className: PropTypes.string,
   useFragment: PropTypes.bool,
-  setKey: PropTypes.string.isRequired,
+  setKey: PropTypes.string,
   stringInterpolationIdentifier: PropTypes.string
 };

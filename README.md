@@ -11,6 +11,14 @@ React components tend to become un-readable with two main issues affecting reada
 In order to reduce boilerplate this library is introducing components that act like a DSL template language but in the 
 form of React components.
 
+## v2.2.0 Breaking changes
+
+- Repeat component has been re-written in order to sort out issues with the key prop
+- Repeat useRandomKeyForIteration has been removed please use setKey as shown in the docs.
+
+**I apologize for any inconvenience but Repeat proved to be more complex than it should. Please READ CAREFULLY the updated
+examples in the documentation below.**
+
 ## v2.1.1 Release Information
 
 - Added 'useFragment' prop for all components, in case you do not want that extra HTML element added to the DOM. 
@@ -191,10 +199,39 @@ Available props for ```<Case>``` (see global props as well):
 #### ```<Repeat>``` Component 
 
 ```jsx
-<Repeat iterator={[{id: 'One', name: 'John'}, {id: 'Two', name: 'Jack'}, {id: 'Three', name: 'Jim'}]}>
-  <div key={8}>
+/* No setKey */
+<Repeat 
+    iterator={[1, 2, 3]}
+>
+  <div>
     {'@iterator.name'}
-    <div key={'@iterator.id'}>{'@iterator.id'}</div>
+    <div>{'@iterator.id'}</div>
+  </div>
+  <div>HI REPEAT #2</div>
+  HI REPEAT #3 {'@iterator.name'}
+</Repeat>
+
+/* Array of objects */
+<Repeat 
+    iterator={[{id: 'One', name: 'John'}, {id: 'Two', name: 'Jack'}, {id: 'Three', name: 'Jim'}]}
+    setKey={"@iterator.name"}
+>
+  <div>
+    {'@iterator.name'}
+    <div>{'@iterator.id'}</div>
+  </div>
+  <div>HI REPEAT #2</div>
+  HI REPEAT #3 {'@iterator.name'}
+</Repeat>
+
+/* Array of primitives */
+<Repeat 
+    iterator={["Jack", "John", "Jill"]}
+    setKey={"@iterator"}
+>
+  <div>
+    {'@iterator.name'}
+    <div>{'@iterator.id'}</div>
   </div>
   <div>HI REPEAT #2</div>
   HI REPEAT #3 {'@iterator.name'}
@@ -210,16 +247,11 @@ Available props (see global props as well):
   * type: **string**
   * default: **"@iterator"**
   * description: **Change the default identifier for when applying the value of each element with {'@iterator'} inside JSX from the Array**
-* **useRandomKeyForIteration**
-  * type: **Boolean**
-  * default: **true**
-  * description: **This will create a random hash based key for every React component or tag passed as children. 
-                   NOTE: If you have already set the key prop then your key will be used instead.
-                   You can disable this feature but it is not recommended.**
-  
-> **If you want to pass the value of each element of an Array you _have_ to use the keyword '@iterator' as seen in the example above.
- This example uses an Array of objects therefore you pass the dot annotation to apply the value you want. in case there was 
- a single value array then '@iterator' would suffice. You can of course change this identifier as seen in the props description.**
+* **setKey**
+  * type: **string**
+  * default: **"index"**. If you want to access values in the array, then if it is an array of primitives values use "@iterator".
+  If it is an array of objects then use "@iterator.PROP_NAME". See examples above.
+  * description: **This prop will set the key for the element being iterated.**
 
 ## License
 
