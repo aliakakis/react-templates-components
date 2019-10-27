@@ -199,16 +199,16 @@ Available props for ```<Case>``` (see global props as well):
 #### ```<Repeat>``` Component 
 
 ```jsx
-/* No setKey */
+/* No setKey default index will be used*/
 <Repeat 
     iterator={[1, 2, 3]}
 >
   <div>
-    {'@iterator.name'}
-    <div>{'@iterator.id'}</div>
+    {'@iterator'}
+    <div>{'@iterator'}</div>
   </div>
   <div>HI REPEAT #2</div>
-  HI REPEAT #3 {'@iterator.name'}
+  HI REPEAT #3 {'@iterator'}
 </Repeat>
 
 /* Array of objects */
