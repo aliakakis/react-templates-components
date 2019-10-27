@@ -230,11 +230,11 @@ Available props for ```<Case>``` (see global props as well):
     setKey={"@iterator"}
 >
   <div>
-    {'@iterator.name'}
-    <div>{'@iterator.id'}</div>
+    {'@iterator'}
+    <div>{'@iterator'}</div>
   </div>
   <div>HI REPEAT #2</div>
-  HI REPEAT #3 {'@iterator.name'}
+  HI REPEAT #3 {'@iterator'}
 </Repeat>
 ```
 
