@@ -133,7 +133,7 @@ Available props (see global props as well):
 
 ```jsx
 <Conditional
-    condition
+    condition={TRUTHLY_OR_FALSY_VALUE}
     tag="div"
     className="custom-class"
 >
