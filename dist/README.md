@@ -186,13 +186,13 @@ Available props (see global props as well):
 ```
 
 Available props for ```<Cases>``` (see global props as well):
-* **condition**
-  * expression: **any**
+* **expression**
+  * type: **any**
   * description: **The expression to evaluate**
   
 Available props for ```<Case>``` (see global props as well):
-* **condition**
-  * expressionValue: **any**
+* **expressionValue**
+  * type: **any**
   * description: **The expressionValue to evaluate with the expression in the ```<Cases>``` component**
 
 
