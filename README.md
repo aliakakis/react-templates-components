@@ -1,15 +1,21 @@
 # React Templates Components
 
-These components are not trying to re-invent the wheel or are anything new and spectacular. The main reason to use them 
+These components are not trying to re-invent the wheel or are anything new and spectacular. The main reason to use them
 is because you should strive to write your React components as humanly readable as possible.
 
 React components tend to become un-readable with two main issues affecting readability:
 
-* Multiple separate render functions which return JSX in the main render() function
-* One large render() function with multiple .map() functions or conditional operators and use of JavaScript in general
+- Multiple separate render functions which return JSX in the main render() function
+- One large render() function with multiple .map() functions or conditional operators and use of JavaScript in general
 
-In order to reduce boilerplate this library is introducing components that act like a DSL template language but in the 
+In order to reduce boilerplate this library is introducing components that act like a DSL template language but in the
 form of React components.
+
+## v2.2.6 Information
+
+The Repeat component is proving more of a hassle than it should. I have marked it as experimental since in order for the component to work
+it has to tamper the internals of a React component. Since this is quite volatile and bad practice I suggest using the usual .map() for iteration.
+I apologize for any inconvenience.
 
 ## v2.2.0 Breaking changes
 
@@ -21,15 +27,15 @@ examples in the documentation below.**
 
 ## v2.1.1 Release Information
 
-- Added 'useFragment' prop for all components, in case you do not want that extra HTML element added to the DOM. 
+- Added 'useFragment' prop for all components, in case you do not want that extra HTML element added to the DOM.
 
-**Please not that in case you set 'useFragment' to true the 'tag' and/or 'className' props will not have any effect on the component. Therefore if you have styled 
+**Please note that in case you set 'useFragment' to true the 'tag' and/or 'className' props will not have any effect on the component. Therefore if you have styled
 the HTML element used in the 'tag' prop, you will get weird styling results.**
 
 ## v2.0.0 Important information
 
 When I started building this library I used JavaScript. However, I am the first to admit that TypeScript is starting
-to grow in me. This update bring the following changes:
+to grow in me. This update brings the following changes:
 
 - TypeScript re-write
 - Functional components in order to be ready for the class based deprecation React will eventually bring upon us
@@ -39,7 +45,7 @@ to grow in me. This update bring the following changes:
 ### Thoughts
 
 I would like to apologize to anyone that is using this package and hope that any breaking changes are easy and fast to refactor.
-As always, please do not hesitate to contact me in case you find a bug. 
+As always, please do not hesitate to contact me in case you find a bug.
 
 ## Getting Started
 
@@ -57,11 +63,13 @@ encounter any issues. Nevertheless, I do suggest a version of React 15+
 ### Installing
 
 Npm:
+
 ```
 npm install --save react-templates-components
 ```
 
-Yarn: 
+Yarn:
+
 ```
 yarn add react-templates-components
 ```
@@ -69,138 +77,119 @@ yarn add react-templates-components
 ## Usage
 
 #### Global props
+
 **_The following props are available for all components:_**
 
-* **tag**
-  * type: **string**
-  * default: **'div'**
-  * description: **You can use here any tag or React element to enclose the children in the same time supporting semantic web**
-* **className**
-  * type: **string**
-  * default: **" "**
-  * description: **The usual value found in all React components that translate to class**
-* **useFragment**
-  * type: **boolean**
-  * default: **false**
-  * description: **The component will use the 'React.Fragment' component. 
-  _Please not that in case you set 'useFragment' to true the 'tag' and/or 'className' props will not have any effect on the component. 
-  Therefore if you have styled the HTML element used in the 'tag' prop, you will get weird styling results._**
+- **tag**
+  - type: **string**
+  - default: **'div'**
+  - description: **You can use here any tag or React element to enclose the children in the same time supporting semantic web**
+- **className**
+  - type: **string**
+  - default: **" "**
+  - description: **The usual value found in all React components that translate to class**
+- **useFragment**
+  - type: **boolean**
+  - default: **false**
+  - description: **The component will use the 'React.Fragment' component.
+    _Please note that in case you set 'useFragment' to true the 'tag' and/or 'className' props will not have any effect on the component.
+    Therefore, if you have styled the HTML element used in the 'tag' prop, you will get weird styling results._**
 
 #### Components
+
 The following components props are available
 
-#### ```<If>``` Component 
+#### `<If>` Component
 
 ```jsx
-<If
-    show={true}
-    tag="section"
-    className="custom-class"
->
-    <div>IF</div>
+<If show={true} tag="section" className="custom-class">
+  <div>IF</div>
 </If>
 ```
 
 Available props (see global props as well):
-* **show**
-  * type: **boolean**
-  * default: **true**
-  * description: **The value which will show/hide the elements you enclose**
 
-  
-#### ```<Else>``` Component 
+- **show**
+
+  - type: **boolean**
+  - default: **true**
+  - description: **The value which will show/hide the elements you enclose**
+
+#### `<Else>` Component
 
 ```jsx
-<Else
-    show={true}
-    tag="section"
-    className="custom-class"
->
-    <div>ELSE</div>
+<Else show={true} tag="section" className="custom-class">
+  <div>ELSE</div>
 </Else>
 ```
 
 Available props (see global props as well):
-* **show**
-  * type: **boolean**
-  * default: **true**
-  * description: **The value which will show/hide the elements you enclose**
-  
-> **It is important to understand that you could do the same thing with 2 If components but by using If and Else you
+
+- **show**
+
+  - type: **boolean**
+  - default: **true**
+  - description: **The value which will show/hide the elements you enclose**
+
+> \*\*It is important to understand that you could do the same thing with 2 If components but by using If and Else you
+
     are covering semantics as well. It is also easier to read**
 
-#### ```<Conditional>``` Component 
+#### `<Conditional>` Component
 
 ```jsx
 <Conditional
-    condition={TRUTHLY_OR_FALSY_VALUE}
-    tag="div"
-    className="custom-class"
+  condition={TRUTHLY_OR_FALSY_VALUE}
+  tag="div"
+  className="custom-class"
 >
-    <If
-        tag="section"
-        className="custom-class"
-    >
-        <div>HI CONDITIONAL IF</div>
-    </If>
-    <Else
-        tag="section"
-        className="custom-class"
-    >
-        <div>HI CONDITIONAL ELSE</div>
-    </Else>
+  <If tag="section" className="custom-class">
+    <div>HI CONDITIONAL IF</div>
+  </If>
+  <Else tag="section" className="custom-class">
+    <div>HI CONDITIONAL ELSE</div>
+  </Else>
 </Conditional>
 ```
 
 Available props (see global props as well):
-* **condition**
-  * type: **boolean**
-  * default: **true**
-  * description: **depending on the 'condition' prop, it will toggle between if and else therefore the prop 'show' in if/else is
-   redundant**
 
-#### ```<Cases>/<Case>``` Component 
+- **condition**
+  - type: **boolean**
+  - default: **true**
+  - description: **depending on the 'condition' prop, it will toggle between if and else therefore the prop 'show' in if/else is
+    redundant**
+
+#### `<Cases>/<Case>` Component
 
 ```jsx
-<Cases
-    expression={'Jack'}
-    tag="div"
-    className="custom-class"
->
-    <Case expressionValue={'Jack'}>
-        Hi Jack
-    </Case>
-    <Case expressionValue={'John'}>
-        Hi John
-    </Case>
-    <Case expressionValue={'Jim'}>
-        Hi Jim 
-    </Case>
-    <Case expressionValue={'Jason'}>
-        Hi Jason
-    </Case>
-    <Case expressionValue={'default'}>
-        Default
-    </Case>
+<Cases expression={"Jack"} tag="div" className="custom-class">
+  <Case expressionValue={"Jack"}>Hi Jack</Case>
+  <Case expressionValue={"John"}>Hi John</Case>
+  <Case expressionValue={"Jim"}>Hi Jim</Case>
+  <Case expressionValue={"Jason"}>Hi Jason</Case>
+  <Case expressionValue={"default"}>Default</Case>
 </Cases>
 ```
 
-Available props for ```<Cases>``` (see global props as well):
-* **expression**
-  * type: **any**
-  * description: **The expression to evaluate**
-  
-Available props for ```<Case>``` (see global props as well):
-* **expressionValue**
-  * type: **any**
-  * description: **The expressionValue to evaluate with the expression in the ```<Cases>``` component**
+Available props for `<Cases>` (see global props as well):
 
+- **expression**
 
-#### ```<Repeat>``` Component 
+  - type: **any**
+  - description: **The expression to evaluate**
+
+Available props for `<Case>` (see global props as well):
+
+- **expressionValue**
+  - type: **any**
+  - description: **The expressionValue to evaluate with the expression in the `<Cases>` component**
+
+#### `<Repeat>` Component **(_EXPERIMENTAL use .map() instead_)**
 
 ```jsx
-/* No setKey default index will be used*/
-<Repeat 
+/* No setKey default index will be used */
+<Repeat
     iterator={[1, 2, 3]}
 >
   <div>
@@ -212,7 +201,7 @@ Available props for ```<Case>``` (see global props as well):
 </Repeat>
 
 /* Array of objects */
-<Repeat 
+<Repeat
     iterator={[{id: 'One', name: 'John'}, {id: 'Two', name: 'Jack'}, {id: 'Three', name: 'Jim'}]}
     setKey={"@iterator.name"}
 >
@@ -225,7 +214,7 @@ Available props for ```<Case>``` (see global props as well):
 </Repeat>
 
 /* Array of primitives */
-<Repeat 
+<Repeat
     iterator={["Jack", "John", "Jill"]}
     setKey={"@iterator"}
 >
@@ -239,19 +228,20 @@ Available props for ```<Case>``` (see global props as well):
 ```
 
 Available props (see global props as well):
-* **iterator**
-  * type: **Array** || **Number**
-  * default: **none this prop _is required_**
-  * description: **Either pass an Array or a number for the component to work**
-* **stringInterpolationIdentifier**
-  * type: **string**
-  * default: **"@iterator"**
-  * description: **Change the default identifier for when applying the value of each element with {'@iterator'} inside JSX from the Array**
-* **setKey**
-  * type: **string**
-  * default: **"index"**. If you want to access values in the array, then if it is an array of primitives values use "@iterator".
-  If it is an array of objects then use "@iterator.PROP_NAME". See examples above.
-  * description: **This prop will set the key for the element being iterated.**
+
+- **iterator**
+  - type: **Array** || **Number**
+  - default: **none this prop _is required_**
+  - description: **Either pass an Array or a number for the component to work**
+- **stringInterpolationIdentifier**
+  - type: **string**
+  - default: **"@iterator"**
+  - description: **Change the default identifier for when applying the value of each element with {'@iterator'} inside JSX from the Array**
+- **setKey**
+  - type: **string**
+  - default: **"index"**. If you want to access values in the array, then if it is an array of primitives values use "@iterator".
+    If it is an array of objects then use "@iterator.PROP_NAME". See examples above.
+  - description: **This prop will set the key for the element being iterated.**
 
 ## License
 
