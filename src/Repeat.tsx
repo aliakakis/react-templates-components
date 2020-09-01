@@ -124,7 +124,7 @@ interface IRepeat extends IProps {
   stringInterpolationIdentifier: string;
 }
 
-export const Repeat = (props: IProps) => {
+export const Repeat = (props: IRepeat) => {
   const {
     iterator,
     children,
