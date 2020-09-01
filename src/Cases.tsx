@@ -1,23 +1,28 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import { GenericObject } from "./interfaces/Global";
-import { Props } from "./interfaces/Component";
+import { IProps } from "./interfaces/Component";
+import { IObject } from "./interfaces/Object";
 
-export const Case = ({ children }: Props) => children;
+interface ICaseProps extends IProps {
+  expressionValue: any;
+}
 
-Case.propTypes = {
-  expressionValue: PropTypes.any.isRequired
-};
+export const Case = ({ children }: ICaseProps) => children;
+
+interface ICasesProps extends IProps {
+  condition?: unknown;
+  expression: unknown;
+}
 
 export const Cases = ({
   children,
   condition,
   expression,
-  tag: Component,
-  className,
-  useFragment
-}: Props) => {
+  tag = "div",
+  className = "",
+  useFragment = false
+}: ICasesProps) => {
   let CaseItem = null;
+  const Component: any = tag;
 
   if (React.Children.count(children) < 2) {
     throw new SyntaxError(
@@ -26,7 +31,7 @@ export const Cases = ({
   }
 
   if (React.Children.count(children) > 2) {
-    let filteredArrayElement = children.filter((childItem: GenericObject) => {
+    let filteredArrayElement = children.filter((childItem: IObject) => {
       return childItem.props.expressionValue === expression;
     });
 
@@ -58,17 +63,4 @@ export const Cases = ({
         : children[1]}
     </Component>
   );
-};
-
-Cases.defaultProps = {
-  tag: "div",
-  className: "",
-  useFragment: false
-};
-
-Cases.propTypes = {
-  expression: PropTypes.any.isRequired,
-  tag: PropTypes.string,
-  className: PropTypes.string,
-  useFragment: PropTypes.bool
 };

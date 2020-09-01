@@ -1,14 +1,19 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import { Props } from "./interfaces/Component";
+import { IProps } from "./interfaces/Component";
+
+interface IIfProps extends IProps {
+  show?: boolean;
+}
 
 export const If = ({
   children,
-  show,
-  tag: Component,
-  className,
-  useFragment
-}: Props) => {
+  show = true,
+  tag = "div",
+  className = "",
+  useFragment = false,
+}: IIfProps) => {
+  const Component: any = tag;
+
   return (
     show &&
     (useFragment ? (
@@ -17,18 +22,4 @@ export const If = ({
       <Component className={className}>{children}</Component>
     ))
   );
-};
-
-If.defaultProps = {
-  show: true,
-  tag: "div",
-  className: "",
-  useFragment: false
-};
-
-If.propTypes = {
-  show: PropTypes.bool,
-  tag: PropTypes.string,
-  className: PropTypes.string,
-  useFragment: PropTypes.bool
 };

@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import cloneDeep from "lodash.clonedeep";
-import { GenericObject } from "./interfaces/Global";
-import { Props } from "./interfaces/Component";
+import { IObject } from "./interfaces/Object";
+import { IProps } from "./interfaces/Component";
 
-const getNestedObjectValue = (obj: GenericObject, path: string) => {
+const getNestedObjectValue = (obj: IObject, path: string) => {
   if (path.split(".").length > 1) {
     const deep = path.split(".");
     for (let value of deep) {
@@ -18,9 +17,9 @@ const getNestedObjectValue = (obj: GenericObject, path: string) => {
 
 const changeValuePropsChildren = (
   source: any,
-  reactElement: GenericObject = {},
+  reactElement: IObject = {},
   iteratorItem: any,
-  props: Props
+  props: IProps
 ) => {
   if (typeof source === "undefined") {
     throw new SyntaxError("Please add children inside Repeat");
@@ -33,7 +32,7 @@ const changeValuePropsChildren = (
       if (item instanceof Array) {
         changeValuePropsChildren(item, {}, iteratorItem, props);
       } else if (item instanceof Object) {
-        const element: GenericObject = item;
+        const element: IObject = item;
 
         for (let prop in element.props) {
           if (element.props.hasOwnProperty(prop) && prop !== "children") {
@@ -119,16 +118,23 @@ const calculateKey = (
   return key;
 };
 
-export const Repeat = (props: Props) => {
+interface IRepeat extends IProps {
+  iterator: IObject[] | number;
+  setKey: string;
+  stringInterpolationIdentifier: string;
+}
+
+export const Repeat = (props: IProps) => {
   const {
     iterator,
     children,
-    tag: Component,
-    className,
-    useFragment,
-    setKey,
-    stringInterpolationIdentifier
+    tag = "div",
+    className = "",
+    useFragment = false,
+    setKey = "index",
+    stringInterpolationIdentifier = "@iterator",
   } = props;
+  const Component: any = tag;
 
   if (typeof iterator === "undefined") {
     throw new SyntaxError("The iterator prop is mandatory");
@@ -167,21 +173,4 @@ export const Repeat = (props: Props) => {
           </Component>
         );
       });
-};
-
-Repeat.defaultProps = {
-  tag: "div",
-  className: "",
-  useFragment: false,
-  setKey: "index",
-  stringInterpolationIdentifier: "@iterator"
-};
-
-Repeat.propTypes = {
-  iterator: PropTypes.oneOfType([PropTypes.array, PropTypes.number]).isRequired,
-  tag: PropTypes.string,
-  className: PropTypes.string,
-  useFragment: PropTypes.bool,
-  setKey: PropTypes.string,
-  stringInterpolationIdentifier: PropTypes.string
 };

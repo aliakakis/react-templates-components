@@ -84,7 +84,7 @@ yarn add react-templates-components
   * default: **false**
   * description: **The component will use the 'React.Fragment' component. 
   _Please not that in case you set 'useFragment' to true the 'tag' and/or 'className' props will not have any effect on the component. 
-  Therefore if you have styled the HTML element used in the 'tag' prop, you will get weird styling results._**
+  Therefore, if you have styled the HTML element used in the 'tag' prop, you will get weird styling results._**
 
 #### Components
 The following components props are available
