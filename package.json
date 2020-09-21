@@ -4,27 +4,21 @@
   "main": "index.js",
   "description": "Simple template based React Components",
   "dependencies": {
-    "@types/lodash.clonedeep": "^4.5.6",
-    "@types/node": "^14.6.2",
-    "@types/react": "^16.9.49",
-    "@types/react-dom": "^16.9.8",
     "lodash.clonedeep": "^4.5.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
-    "prettier": "^2.1.1",
-    "ts-loader": "^8.0.3",
-    "tslib": "^2.0.1",
-    "typescript": "^4.0.2"
+    "prettier": "^2.1.2"
   },
   "keywords": [
     "react",
     "templates"
   ],
   "scripts": {
-    "build": "npx parcel build src/index.tsx --no-source-maps --experimental-scope-hoisting"
+    "build": "npx parcel build src/index.jsx --no-source-maps --experimental-scope-hoisting"
   },
   "author": "Antonios Liakakis",
   "license": "ISC"

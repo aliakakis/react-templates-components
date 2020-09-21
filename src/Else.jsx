@@ -1,19 +1,13 @@
 import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
+import PropTypes from "prop-types";
 
-interface IIfProps extends IProps {
-  show?: boolean;
-}
-
-export const If = ({
+export const Else = ({
   children,
   show = true,
-  tag = "div",
+  tag: Component = "div",
   className = "",
   useFragment = false,
-}: IIfProps) => {
-  const Component: any = tag;
-
+}) => {
   return (
     show &&
     (useFragment ? (
@@ -22,4 +16,11 @@ export const If = ({
       <Component className={className}>{children}</Component>
     ))
   );
+};
+
+Else.propTypes = {
+  show: PropTypes.bool,
+  tag: PropTypes.string,
+  className: PropTypes.string,
+  useFragment: PropTypes.bool,
 };

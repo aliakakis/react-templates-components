@@ -1,19 +1,13 @@
 import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
+import PropTypes from "prop-types";
 
-interface IElseProps extends IProps {
-  show?: boolean;
-}
-
-export const Else = ({
+export const If = ({
   children,
   show = true,
-  tag = "div",
+  tag: Component = "div",
   className = "",
   useFragment = false,
-}: IElseProps) => {
-  const Component: any = tag;
-
+}) => {
   return (
     show &&
     (useFragment ? (
@@ -22,4 +16,11 @@ export const Else = ({
       <Component className={className}>{children}</Component>
     ))
   );
+};
+
+If.propTypes = {
+  show: PropTypes.bool,
+  tag: PropTypes.string,
+  className: PropTypes.string,
+  useFragment: PropTypes.bool,
 };

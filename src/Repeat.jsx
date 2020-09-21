@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import cloneDeep from "lodash.clonedeep";
-import { IObject } from "./interfaces/Object";
-import { IProps } from "./interfaces/Component";
 
-const getNestedObjectValue = (obj: IObject, path: string) => {
+const getNestedObjectValue = (obj, path) => {
   if (path.split(".").length > 1) {
     const deep = path.split(".");
     for (let value of deep) {
@@ -16,10 +15,10 @@ const getNestedObjectValue = (obj: IObject, path: string) => {
 };
 
 const changeValuePropsChildren = (
-  source: any,
-  reactElement: IObject = {},
-  iteratorItem: any,
-  props: IProps
+  source,
+  reactElement = {},
+  iteratorItem,
+  props
 ) => {
   if (typeof source === "undefined") {
     throw new SyntaxError("Please add children inside Repeat");
@@ -32,7 +31,7 @@ const changeValuePropsChildren = (
       if (item instanceof Array) {
         changeValuePropsChildren(item, {}, iteratorItem, props);
       } else if (item instanceof Object) {
-        const element: IObject = item;
+        const element = item;
 
         for (let prop in element.props) {
           if (element.props.hasOwnProperty(prop) && prop !== "children") {
@@ -96,13 +95,8 @@ const changeValuePropsChildren = (
   return source;
 };
 
-const calculateKey = (
-  setKey: string,
-  item: any,
-  stringInterpolationIdentifier: string,
-  index: number
-) => {
-  let key: string | number;
+const calculateKey = (setKey, item, stringInterpolationIdentifier, index) => {
+  let key;
 
   if (setKey === "index") {
     key = index;
@@ -118,33 +112,24 @@ const calculateKey = (
   return key;
 };
 
-interface IRepeat extends IProps {
-  iterator: IObject[] | number;
-  setKey: string;
-  stringInterpolationIdentifier: string;
-}
-
-export const Repeat = (props: IRepeat) => {
-  const {
-    iterator,
-    children,
-    tag = "div",
-    className = "",
-    useFragment = false,
-    setKey = "index",
-    stringInterpolationIdentifier = "@iterator",
-  } = props;
-  const Component: any = tag;
-
+export const Repeat = ({
+  iterator,
+  children,
+  tag: Component = "div",
+  className = "",
+  useFragment = false,
+  setKey = "index",
+  stringInterpolationIdentifier = "@iterator",
+}) => {
   if (typeof iterator === "undefined") {
     throw new SyntaxError("The iterator prop is mandatory");
   }
 
-  let iteratorProp: any[] =
+  let iteratorProp =
     typeof iterator === "number" ? [...new Array(iterator)] : iterator;
 
   return useFragment
-    ? iteratorProp.map((item: any, index: number) => {
+    ? iteratorProp.map((item, index) => {
         return (
           <Fragment
             key={calculateKey(
@@ -158,7 +143,7 @@ export const Repeat = (props: IRepeat) => {
           </Fragment>
         );
       })
-    : iteratorProp.map((item: any, index: number) => {
+    : iteratorProp.map((item, index) => {
         return (
           <Component
             className={className}
@@ -173,4 +158,13 @@ export const Repeat = (props: IRepeat) => {
           </Component>
         );
       });
+};
+
+Repeat.propTypes = {
+  iterator: PropTypes.oneOfType([PropTypes.array, PropTypes.number]).isRequired,
+  tag: PropTypes.string,
+  className: PropTypes.string,
+  stringInterpolationIdentifier: PropTypes.string,
+  useRandomKeyForIteration: PropTypes.bool,
+  useFragment: PropTypes.bool,
 };

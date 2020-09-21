@@ -1,19 +1,13 @@
 import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
-
-interface IConditionalProps extends IProps {
-  condition?: boolean;
-}
+import PropTypes from "prop-types";
 
 export const Conditional = ({
   children,
   condition = true,
-  tag = "div",
+  tag: Component = "div",
   className = "",
   useFragment = false,
-}: IConditionalProps) => {
-  const Component: any = tag;
-
+}) => {
   if (React.Children.count(children) < 2) {
     throw new SyntaxError(
       "You must include an If component and an Else component"
@@ -27,4 +21,11 @@ export const Conditional = ({
       {condition ? children[0] : children[1]}
     </Component>
   );
+};
+
+Conditional.propTypes = {
+  condition: PropTypes.bool.isRequired,
+  tag: PropTypes.string,
+  className: PropTypes.string,
+  useFragment: PropTypes.bool,
 };
