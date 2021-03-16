@@ -11,6 +11,18 @@ React components tend to become un-readable with two main issues affecting reada
 In order to reduce boilerplate this library is introducing components that act like a DSL template language but in the
 form of React components.
 
+## Suggestion
+
+React has an enormous ecosystem of libraries and frameworks. However, after many years of React and Vue projects, I realize
+that there are many "moving parts" to an application. Too many packages from various developers, some of which are no
+longer maintained. Even this package, might feel unmaintained, especially after so many months of inactivity. Although, this
+package is more or less feature complete, I strongly advise if you need to use it, then download the source code, instead of the
+npm package. The source code itself is just plain React code with nothing fancy. The only possible issue is Typescript which might
+not be in your current tech-stack.
+
+Moreover, personally I try not to install too many packages. If I have to, then I tend to choose based on whether the package
+is being developed by a corporate entity, or the community behind the package has enormous and consistent support.
+
 ## v2.2.6 Information
 
 The Repeat component is proving more of a hassle than it should. I have marked it as experimental since in order for the component to work
@@ -139,9 +151,9 @@ Available props (see global props as well):
 
 ```jsx
 <Conditional
-  condition={TRUTHLY_OR_FALSY_VALUE}
-  tag="div"
-  className="custom-class"
+        condition={TRUTHLY_OR_FALSY_VALUE}
+        tag="div"
+        className="custom-class"
 >
   <If tag="section" className="custom-class">
     <div>HI CONDITIONAL IF</div>
@@ -190,7 +202,7 @@ Available props for `<Case>` (see global props as well):
 ```jsx
 /* No setKey default index will be used */
 <Repeat
-    iterator={[1, 2, 3]}
+        iterator={[1, 2, 3]}
 >
   <div>
     {'@iterator'}
@@ -202,8 +214,8 @@ Available props for `<Case>` (see global props as well):
 
 /* Array of objects */
 <Repeat
-    iterator={[{id: 'One', name: 'John'}, {id: 'Two', name: 'Jack'}, {id: 'Three', name: 'Jim'}]}
-    setKey={"@iterator.name"}
+        iterator={[{id: 'One', name: 'John'}, {id: 'Two', name: 'Jack'}, {id: 'Three', name: 'Jim'}]}
+        setKey={"@iterator.name"}
 >
   <div>
     {'@iterator.name'}
@@ -215,8 +227,8 @@ Available props for `<Case>` (see global props as well):
 
 /* Array of primitives */
 <Repeat
-    iterator={["Jack", "John", "Jill"]}
-    setKey={"@iterator"}
+        iterator={["Jack", "John", "Jill"]}
+        setKey={"@iterator"}
 >
   <div>
     {'@iterator'}
