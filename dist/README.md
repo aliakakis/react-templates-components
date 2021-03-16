@@ -17,10 +17,10 @@ React has an enormous ecosystem of libraries and frameworks. However, after many
 that there are many "moving parts" to an application. Too many packages from various developers, some of which are no
 longer maintained. Even this package, might feel unmaintained, especially after so many months of inactivity. Although, this
 package is more or less feature complete, I strongly advise if you need to use it, then download the source code, instead of the 
-npm package. The source code itself is just plain React code with nothing fancy. The only possible issue is Typescript which might 
-not be in your current tech-stack. 
+npm package. The source code itself is just plain React code with nothing fancy. The only possible issue is TypeScript which might 
+not be in your current tech-stack. However, you will find the JavaScript version at github under "src/js". 
 
-Moreover, personally I try not to install too many packages. If I have to, then I tend to choose based on whether the package
+Finally, personally I try not to install too many packages. If I have to, then I tend to choose based on whether the package
 is being developed by a corporate entity, or the community behind the package has enormous and consistent support.
 
 ## v2.2.6 Information
