@@ -1,16 +1,15 @@
 import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
-import { IObject } from "./interfaces/Object";
+import { Props } from "./interfaces/Component";
 
-interface ICaseProps extends IProps {
+interface ICaseProps extends Props {
   expressionValue: any;
 }
 
 export const Case = ({ children }: ICaseProps) => children;
 
-interface ICasesProps extends IProps {
-  condition?: unknown;
-  expression: unknown;
+interface CasesProps extends Props {
+  condition?: any;
+  expression: any;
 }
 
 export const Cases = ({
@@ -19,8 +18,8 @@ export const Cases = ({
   expression,
   tag = "div",
   className = "",
-  useFragment = false
-}: ICasesProps) => {
+  useFragment = false,
+}: CasesProps): JSX.Element => {
   let CaseItem = null;
   const Component: any = tag;
 
@@ -31,9 +30,11 @@ export const Cases = ({
   }
 
   if (React.Children.count(children) > 2) {
-    let filteredArrayElement = children.filter((childItem: IObject) => {
-      return childItem.props.expressionValue === expression;
-    });
+    let filteredArrayElement = children.filter(
+      (childItem: Record<string, any>) => {
+        return childItem.props.expressionValue === expression;
+      }
+    );
 
     if (filteredArrayElement.length === 0) {
       CaseItem = children[children.length - 1];

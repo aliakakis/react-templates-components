@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
+import { Props } from "./interfaces/Component";
 
-interface IConditionalProps extends IProps {
+interface ConditionalProps extends Props {
   condition?: boolean;
 }
 
@@ -11,7 +11,7 @@ export const Conditional = ({
   tag = "div",
   className = "",
   useFragment = false,
-}: IConditionalProps) => {
+}: ConditionalProps): JSX.Element => {
   const Component: any = tag;
 
   if (React.Children.count(children) < 2) {

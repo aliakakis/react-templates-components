@@ -8,13 +8,14 @@ export const Else = ({
   className = "",
   useFragment = false,
 }) => {
-  return (
-    show &&
-    (useFragment ? (
+  return show ? (
+    useFragment ? (
       <Fragment>{children}</Fragment>
     ) : (
       <Component className={className}>{children}</Component>
-    ))
+    )
+  ) : (
+    <Fragment />
   );
 };
 

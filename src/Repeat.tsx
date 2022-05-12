@@ -1,25 +1,23 @@
 import React, { Fragment } from "react";
 import cloneDeep from "lodash.clonedeep";
-import { IObject } from "./interfaces/Object";
-import { IProps } from "./interfaces/Component";
+import { Props } from "./interfaces/Component";
 
-const getNestedObjectValue = (obj: IObject, path: string) => {
-  if (path.split(".").length > 1) {
-    const deep = path.split(".");
-    for (let value of deep) {
-      obj = obj[value];
-    }
-    return obj;
-  } else {
-    return obj[path];
+const getNestedObjectValue = (
+  obj: Record<string, any>,
+  path: string
+): Record<string, any> | any => {
+  const deep = path.split(".");
+  for (const value of deep) {
+    obj = obj[value] as Record<string, any>;
   }
+  return obj;
 };
 
 const changeValuePropsChildren = (
   source: any,
-  reactElement: IObject = {},
+  reactElement: Record<string, any> = {},
   iteratorItem: any,
-  props: IProps
+  props: Props
 ) => {
   if (typeof source === "undefined") {
     throw new SyntaxError("Please add children inside Repeat");
@@ -32,7 +30,7 @@ const changeValuePropsChildren = (
       if (item instanceof Array) {
         changeValuePropsChildren(item, {}, iteratorItem, props);
       } else if (item instanceof Object) {
-        const element: IObject = item;
+        const element: Record<string, any> = item;
 
         for (let prop in element.props) {
           if (element.props.hasOwnProperty(prop) && prop !== "children") {
@@ -112,19 +110,19 @@ const calculateKey = (
     key = getNestedObjectValue(
       item,
       setKey.split(stringInterpolationIdentifier + ".")[1]
-    );
+    ) as number;
   }
 
   return key;
 };
 
-interface IRepeat extends IProps {
-  iterator: IObject[] | number;
+interface IRepeat extends Props {
+  iterator: Object[] | number;
   setKey: string;
   stringInterpolationIdentifier: string;
 }
 
-export const Repeat = (props: IRepeat) => {
+export const Repeat = (props: IRepeat): any[] => {
   const {
     iterator,
     children,

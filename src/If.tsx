@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
+import { Props } from "./interfaces/Component";
 
-interface IIfProps extends IProps {
+interface IfProps extends Props {
   show?: boolean;
 }
 
@@ -11,15 +11,16 @@ export const If = ({
   tag = "div",
   className = "",
   useFragment = false,
-}: IIfProps) => {
+}: IfProps): JSX.Element => {
   const Component: any = tag;
 
-  return (
-    show &&
-    (useFragment ? (
+  return show ? (
+    useFragment ? (
       <Fragment>{children}</Fragment>
     ) : (
       <Component className={className}>{children}</Component>
-    ))
+    )
+  ) : (
+    <Fragment />
   );
 };
