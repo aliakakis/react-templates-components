@@ -23,6 +23,10 @@ not be in your current tech-stack. However, you will find the JavaScript version
 Finally, personally I try not to install too many packages. If I have to, then I tend to choose based on whether the package
 is being developed by a corporate entity, or the community behind the package has enormous and consistent support.
 
+## v2.3.0 Information
+
+- Switched to Vite for bundling.
+
 ## v2.2.6 Information
 
 The Repeat component is proving more of a hassle than it should. I have marked it as experimental since in order for the component to work

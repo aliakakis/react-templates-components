@@ -1,13 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
-export const Case = ({ children }) => children;
-
-Case.propTypes = {
-  expressionValue: PropTypes.any.isRequired,
-};
-
-export const Cases = ({
+const Cases = ({
   children,
   condition,
   expression,
@@ -64,3 +58,5 @@ Cases.propTypes = {
   className: PropTypes.string,
   useFragment: PropTypes.bool,
 };
+
+export default Cases;

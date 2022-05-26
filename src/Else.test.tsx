@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Else } from "./Else";
+import Else from "./Else";
 
 describe("Tests for Else template component", () => {
   describe("Tests for Else template component for show property", () => {

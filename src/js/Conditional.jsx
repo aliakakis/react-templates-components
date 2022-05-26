@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
-export const Conditional = ({
+const Conditional = ({
   children,
   condition = true,
   tag: Component = "div",
@@ -29,3 +29,5 @@ Conditional.propTypes = {
   className: PropTypes.string,
   useFragment: PropTypes.bool,
 };
+
+export default Conditional;

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
-export const Else = ({
+const Else = ({
   children,
   show = true,
   tag: Component = "div",
@@ -25,3 +25,5 @@ Else.propTypes = {
   className: PropTypes.string,
   useFragment: PropTypes.bool,
 };
+
+export default Else;

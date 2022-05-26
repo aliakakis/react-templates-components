@@ -5,7 +5,7 @@ interface ConditionalProps extends Props {
   condition?: boolean;
 }
 
-export const Conditional = ({
+const Conditional = ({
   children,
   condition = true,
   tag = "div",
@@ -28,3 +28,5 @@ export const Conditional = ({
     </Component>
   );
 };
+
+export default Conditional;

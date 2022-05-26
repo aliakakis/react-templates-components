@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { If } from "./If";
+import If from "./If";
 
 describe("Tests for If template component", () => {
   describe("Tests for If template component for show property", () => {

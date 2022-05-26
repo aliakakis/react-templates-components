@@ -116,13 +116,13 @@ const calculateKey = (
   return key;
 };
 
-interface IRepeat extends Props {
+interface Repeat extends Props {
   iterator: Object[] | number;
   setKey: string;
   stringInterpolationIdentifier: string;
 }
 
-export const Repeat = (props: IRepeat): any[] => {
+const Repeat = (props: Repeat): any[] => {
   const {
     iterator,
     children,
@@ -172,3 +172,5 @@ export const Repeat = (props: IRepeat): any[] => {
         );
       });
 };
+
+export default Repeat;

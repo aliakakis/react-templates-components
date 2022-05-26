@@ -10,6 +10,21 @@ export default defineConfig({
       "@": path.resolve(path.dirname(fileURLToPath(import.meta.url)), "src"),
     },
   },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, "src/index.tsx"),
+      name: "React Templates Components",
+      fileName: "es",
+    },
+    rollupOptions: {
+      external: ["react"],
+      output: {
+        globals: {
+          react: "React",
+        },
+      },
+    },
+  },
   test: {
     globals: true,
     environment: "jsdom",

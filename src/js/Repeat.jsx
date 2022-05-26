@@ -112,7 +112,7 @@ const calculateKey = (setKey, item, stringInterpolationIdentifier, index) => {
   return key;
 };
 
-export const Repeat = ({
+const Repeat = ({
   iterator,
   children,
   tag: Component = "div",
@@ -168,3 +168,5 @@ Repeat.propTypes = {
   useRandomKeyForIteration: PropTypes.bool,
   useFragment: PropTypes.bool,
 };
+
+export default Repeat;

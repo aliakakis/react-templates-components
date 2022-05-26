@@ -1,18 +1,12 @@
 import React, { Fragment } from "react";
 import { Props } from "./interfaces/Component";
 
-interface ICaseProps extends Props {
-  expressionValue: any;
-}
-
-export const Case = ({ children }: ICaseProps) => children;
-
 interface CasesProps extends Props {
   condition?: any;
   expression: any;
 }
 
-export const Cases = ({
+const Cases = ({
   children,
   condition,
   expression,
@@ -65,3 +59,5 @@ export const Cases = ({
     </Component>
   );
 };
+
+export default Cases;

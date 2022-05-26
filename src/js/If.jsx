@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
-export const If = ({
+const If = ({
   children,
   show = true,
   tag: Component = "div",
@@ -25,3 +25,5 @@ If.propTypes = {
   className: PropTypes.string,
   useFragment: PropTypes.bool,
 };
+
+export default If;

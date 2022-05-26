@@ -1,5 +1,8 @@
-export { Conditional } from "./Conditional";
-export { If } from "./If";
-export { Else } from "./Else";
-export { Repeat } from "./Repeat";
-export { Cases, Case } from "./Cases";
+import Conditional from "./Conditional";
+import If from "./If";
+import Else from "./Else";
+import Repeat from "./Repeat";
+import Case from "./Case";
+import Cases from "./Cases";
+
+export { Conditional, If, Else, Repeat, Case, Cases };

@@ -5,7 +5,7 @@ interface ElseProps extends Props {
   show?: boolean;
 }
 
-export const Else = ({
+const Else = ({
   children,
   show = true,
   tag = "div",
@@ -24,3 +24,5 @@ export const Else = ({
     <Fragment />
   );
 };
+
+export default Else;

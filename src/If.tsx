@@ -5,7 +5,7 @@ interface IfProps extends Props {
   show?: boolean;
 }
 
-export const If = ({
+const If = ({
   children,
   show = true,
   tag = "div",
@@ -24,3 +24,5 @@ export const If = ({
     <Fragment />
   );
 };
+
+export default If;
