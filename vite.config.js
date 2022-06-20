@@ -14,7 +14,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.tsx"),
       name: "React Templates Components",
-      fileName: "es",
+      fileName: (format) => `${format === "es" ? "index" : format}.js`,
     },
     rollupOptions: {
       external: ["react"],
