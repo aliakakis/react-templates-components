@@ -9,6 +9,8 @@ export default defineConfig({
   format: ["esm", "cjs"],
   platform: "neutral",
   dts: true,
+  clean: false,
+  outDir: "publish",
   sourcemap: !isProduction,
   minify: isProduction,
   external: ["react", "react-dom"],
