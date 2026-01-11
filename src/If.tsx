@@ -1,25 +1,23 @@
-import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
+import type { ExoticComponent, FragmentProps } from "react";
+import type { RtSharedProps } from "./interfaces/Component";
+import { Fragment } from "react";
 
-interface IIfProps extends IProps {
+
+interface IfProps extends RtSharedProps {
   show?: boolean;
 }
 
-export const If = ({
+export function If({
   children,
   show = true,
   tag = "div",
   className = "",
   useFragment = false,
-}: IIfProps) => {
-  const Component: any = tag;
+}: IfProps) {
+  const Component: string | ExoticComponent<FragmentProps> = useFragment
+    ? Fragment
+    : tag;
+  const hasComponentProps = !useFragment && { className };
 
-  return (
-    show &&
-    (useFragment ? (
-      <Fragment>{children}</Fragment>
-    ) : (
-      <Component className={className}>{children}</Component>
-    ))
-  );
-};
+  return show && <Component {...hasComponentProps}>{children}</Component>;
+}

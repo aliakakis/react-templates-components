@@ -1,6 +1,6 @@
 {
   "name": "react-templates-components",
-  "version": "2.2.8",
+  "version": "2.3.0",
   "main": "index.js",
   "description": "Simple template based React Components",
   "keywords": [
@@ -12,5 +12,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/aliakakis/react-templates-components"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
   }
 }

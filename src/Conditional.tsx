@@ -1,30 +1,48 @@
-import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
+import type { ExoticComponent, FragmentProps, ReactNode } from "react";
+import type { RtSharedProps } from "./interfaces/Component";
+import { Children, Fragment, useMemo } from "react";
+import { Error } from "./Error";
 
-interface IConditionalProps extends IProps {
+interface ConditionalProps extends RtSharedProps {
   condition?: boolean;
 }
 
-export const Conditional = ({
+function resolveConditional(
+  conditionals: ReactNode[],
+  condition: boolean
+): ReactNode {
+  const hasNoMatches = conditionals.length === 0;
+  const hasAboveTwo = conditionals.length > 2;
+  const hasLessThanTwo = conditionals.length < 2;
+
+  if (hasNoMatches || hasAboveTwo || hasLessThanTwo) {
+    return (
+      <Error>
+        You must include exactly one If component and one Else component
+      </Error>
+    );
+  }
+
+  return condition ? conditionals[0] : conditionals[1];
+}
+
+export function Conditional({
   children,
   condition = true,
   tag = "div",
   className = "",
   useFragment = false,
-}: IConditionalProps) => {
-  const Component: any = tag;
+}: ConditionalProps) {
+  const Component: string | ExoticComponent<FragmentProps> = useFragment
+    ? Fragment
+    : tag;
+  const hasComponentProps = !useFragment && { className };
 
-  if (React.Children.count(children) < 2) {
-    throw new SyntaxError(
-      "You must include an If component and an Else component"
-    );
-  }
+  const childrenArray = useMemo(() => Children.toArray(children), [children]);
 
-  return useFragment ? (
-    <Fragment>{condition ? children[0] : children[1]}</Fragment>
-  ) : (
-    <Component className={className}>
-      {condition ? children[0] : children[1]}
+  return (
+    <Component {...hasComponentProps}>
+      {resolveConditional(childrenArray, condition)}
     </Component>
   );
-};
+}

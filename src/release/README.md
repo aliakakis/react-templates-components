@@ -16,9 +16,9 @@ form of React components.
 React has an enormous ecosystem of libraries and frameworks. However, after many years of React and Vue projects, I realize
 that there are many "moving parts" to an application. Too many packages from various developers, some of which are no
 longer maintained. Even this package, might feel unmaintained, especially after so many months of inactivity. Although, this
-package is more or less feature complete, I strongly advise if you need to use it, then download the source code, instead of the 
-npm package. The source code itself is just plain React code with nothing fancy. The only possible issue is TypeScript which might 
-not be in your current tech-stack. However, you will find the JavaScript version at github under "src/js". 
+package is more or less feature complete, I strongly advise if you need to use it, then download the source code, instead of the
+npm package. The source code itself is just plain React code with nothing fancy. The only possible issue is TypeScript which might
+not be in your current tech-stack. However, you will find the JavaScript version at github under "src/js".
 
 Finally, personally I try not to install too many packages. If I have to, then I tend to choose based on whether the package
 is being developed by a corporate entity, or the community behind the package has enormous and consistent support.
@@ -122,7 +122,6 @@ The following components props are available
 Available props (see global props as well):
 
 - **show**
-
   - type: **boolean**
   - default: **true**
   - description: **The value which will show/hide the elements you enclose**
@@ -138,7 +137,6 @@ Available props (see global props as well):
 Available props (see global props as well):
 
 - **show**
-
   - type: **boolean**
   - default: **true**
   - description: **The value which will show/hide the elements you enclose**
@@ -187,7 +185,6 @@ Available props (see global props as well):
 Available props for `<Cases>` (see global props as well):
 
 - **expression**
-
   - type: **any**
   - description: **The expression to evaluate**
 

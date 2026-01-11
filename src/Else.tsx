@@ -1,25 +1,22 @@
-import React, { Fragment } from "react";
-import { IProps } from "./interfaces/Component";
+import type { ExoticComponent, FragmentProps } from "react";
+import type { RtSharedProps } from "./interfaces/Component";
+import { Fragment } from "react";
 
-interface IElseProps extends IProps {
+interface ElseProps extends RtSharedProps {
   show?: boolean;
 }
 
-export const Else = ({
+export function Else({
   children,
   show = true,
   tag = "div",
   className = "",
   useFragment = false,
-}: IElseProps) => {
-  const Component: any = tag;
+}: ElseProps) {
+  const Component: string | ExoticComponent<FragmentProps> = useFragment
+    ? Fragment
+    : tag;
+  const hasComponentProps = !useFragment && { className };
 
-  return (
-    show &&
-    (useFragment ? (
-      <Fragment>{children}</Fragment>
-    ) : (
-      <Component className={className}>{children}</Component>
-    ))
-  );
-};
+  return show && <Component {...hasComponentProps}>{children}</Component>;
+}

@@ -1,31 +1,60 @@
 {
   "name": "@aliakakis/react-templates-components",
   "version": "1.0.0",
-  "main": "index.js",
   "description": "Simple template based React Components",
+  "type": "module",
   "dependencies": {
-    "@types/lodash.clonedeep": "^4.5.6",
-    "@types/node": "^14.6.2",
-    "@types/react": "^16.9.49",
-    "@types/react-dom": "^16.9.8",
-    "lodash.clonedeep": "^4.5.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "prettier": "^2.1.1",
-    "ts-loader": "^8.0.3",
-    "tslib": "^2.0.1",
-    "typescript": "^4.0.2"
+    "@eslint/js": "^9.39.2",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@tsconfig/strictest": "^2.0.8",
+    "@types/node": "^25.0.6",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/browser-playwright": "^4.0.16",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^17.0.0",
+    "husky": "^9.1.7",
+    "playwright": "^1.57.0",
+    "prettier": "^3.7.4",
+    "tsdown": "^0.19.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.52.0",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.16",
+    "vitest-browser-react": "^2.0.2"
   },
   "keywords": [
     "react",
     "templates"
   ],
   "scripts": {
-    "build": "npx parcel build src/index.tsx --no-source-maps --experimental-scope-hoisting"
+    "build": "npm run preBuildChecks && cross-env NODE_ENV=production tsdown",
+    "build:react-compiler": "npm run preBuildChecks && cross-env NODE_ENV=production USE_REACT_COMPILER=true tsdown",
+    "dev": "tsdown",
+    "dev:react-compiler": "cross-env USE_REACT_COMPILER=true tsdown",
+    "play": "vite",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ./src --ext .ts,.tsx",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write .",
+    "preBuildChecks": "npm run typecheck && npm run lint && npm run test",
+    "prepare": "husky"
   },
   "author": "Antonios Liakakis",
-  "license": "ISC"
+  "license": "ISC",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  }
 }

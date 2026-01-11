@@ -1,29 +1,27 @@
 {
+  "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist/",
-    "target": "es5",
-    "module": "commonjs",
     "strict": true,
-    "jsx": "react",
     "importHelpers": true,
-    "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
     "removeComments": true,
     "baseUrl": ".",
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "lib": ["es2023", "DOM"],
+    "moduleDetection": "force",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "verbatimModuleSyntax": true,
   },
-  "include": [
-    "./src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
 }

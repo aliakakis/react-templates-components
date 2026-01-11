@@ -44,16 +44,16 @@ export const Cases = ({
       {React.Children.count(children) > 2
         ? CaseItem
         : condition
-        ? children[0]
-        : children[1]}
+          ? children[0]
+          : children[1]}
     </Fragment>
   ) : (
     <Component className={className}>
       {React.Children.count(children) > 2
         ? CaseItem
         : condition
-        ? children[0]
-        : children[1]}
+          ? children[0]
+          : children[1]}
     </Component>
   );
 };

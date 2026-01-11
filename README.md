@@ -122,7 +122,6 @@ The following components props are available
 Available props (see global props as well):
 
 - **show**
-
   - type: **boolean**
   - default: **true**
   - description: **The value which will show/hide the elements you enclose**
@@ -138,14 +137,11 @@ Available props (see global props as well):
 Available props (see global props as well):
 
 - **show**
-
   - type: **boolean**
   - default: **true**
   - description: **The value which will show/hide the elements you enclose**
 
-> \*\*It is important to understand that you could do the same thing with 2 If components but by using If and Else you
-
-    are covering semantics as well. It is also easier to read**
+> **It is important to understand that you could do the same thing with 2 If components but by using If and Else you are covering semantics as well. It is also easier to read**
 
 #### `<Conditional>` Component
 
@@ -169,7 +165,7 @@ Available props (see global props as well):
 - **condition**
   - type: **boolean**
   - default: **true**
-  - description: **depending on the 'condition' prop, it will toggle between if and else therefore the prop 'show' in if/else is
+  - description: **depending on the 'condition' prop, it will toggle between if and else, therefore, the prop 'show' in if/else is
     redundant**
 
 #### `<Cases>/<Case>` Component
@@ -187,7 +183,6 @@ Available props (see global props as well):
 Available props for `<Cases>` (see global props as well):
 
 - **expression**
-
   - type: **any**
   - description: **The expression to evaluate**
 

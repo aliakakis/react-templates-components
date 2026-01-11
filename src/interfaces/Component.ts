@@ -1,8 +1,7 @@
-import { IObject } from "./Object";
+import type { PropsWithChildren } from "react";
 
-export interface IProps extends IObject {
-    children?: any;
-    tag?: string;
-    className?: string;
-    useFragment?: boolean;
+export interface RtSharedProps extends PropsWithChildren {
+  tag?: string;
+  className?: string;
+  useFragment?: boolean;
 }
