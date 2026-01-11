@@ -2,7 +2,6 @@ import type { ExoticComponent, FragmentProps } from "react";
 import type { RtSharedProps } from "./interfaces/Component";
 import { Fragment } from "react";
 
-
 interface IfProps extends RtSharedProps {
   show?: boolean;
 }

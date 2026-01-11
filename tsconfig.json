@@ -20,7 +20,7 @@
     "types": ["node"],
     "declaration": true,
     "emitDeclarationOnly": true,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]

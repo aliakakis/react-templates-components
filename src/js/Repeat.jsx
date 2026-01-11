@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import cloneDeep from "lodash.clonedeep";
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
 
 const getNestedObjectValue = (obj, path) => {
   if (path.split(".").length > 1) {
