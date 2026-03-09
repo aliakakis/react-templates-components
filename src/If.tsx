@@ -1,6 +1,6 @@
-import type { ExoticComponent, FragmentProps } from "react";
-import type { RtSharedProps } from "./interfaces/Component";
-import { Fragment } from "react";
+import type { ExoticComponent, FragmentProps } from 'react';
+import type { RtSharedProps } from './interfaces/Component';
+import { Fragment } from 'react';
 
 interface IfProps extends RtSharedProps {
   show?: boolean;
@@ -9,8 +9,8 @@ interface IfProps extends RtSharedProps {
 export function If({
   children,
   show = true,
-  tag = "div",
-  className = "",
+  tag = 'div',
+  className = '',
   useFragment = false,
 }: IfProps) {
   const Component: string | ExoticComponent<FragmentProps> = useFragment

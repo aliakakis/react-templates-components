@@ -1,7 +1,7 @@
-import type { ExoticComponent, FragmentProps, ReactNode } from "react";
-import type { RtSharedProps } from "./interfaces/Component";
-import React, { Children, Fragment, isValidElement, useMemo } from "react";
-import { Error } from "./Error";
+import type { ExoticComponent, FragmentProps, ReactNode } from 'react';
+import type { RtSharedProps } from './interfaces/Component';
+import React, { Fragment, isValidElement, useMemo } from 'react';
+import { Error } from './Error';
 
 interface CaseProps extends RtSharedProps {
   expressionValue: string | number;
@@ -67,17 +67,20 @@ function filterChildrenByExpression(
 export function Cases({
   children,
   expression,
-  tag = "div",
-  className = "",
+  tag = 'div',
+  className = '',
   useFragment = false,
-  defaultExpressionValue = "default",
+  defaultExpressionValue = 'default',
 }: CasesProps) {
   const Component: string | ExoticComponent<FragmentProps> = useFragment
     ? Fragment
     : tag;
   const hasComponentProps = !useFragment && { className };
 
-  const childrenArray = useMemo(() => Children.toArray(children), [children]);
+  const childrenArray = useMemo(
+    () => (Array.isArray(children) ? children : [children]),
+    [children]
+  );
 
   const caseNode = useMemo(
     () => filterChildrenByExpression(childrenArray, expression),

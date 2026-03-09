@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 
 export const Conditional = ({
   children,
   condition = true,
-  tag: Component = "div",
-  className = "",
+  tag: Component = 'div',
+  className = '',
   useFragment = false,
 }) => {
   if (React.Children.count(children) < 2) {
     throw new SyntaxError(
-      "You must include an If component and an Else component"
+      'You must include an If component and an Else component'
     );
   }
 

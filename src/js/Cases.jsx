@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 
 export const Case = ({ children }) => children;
 
@@ -11,15 +11,15 @@ export const Cases = ({
   children,
   condition,
   expression,
-  tag: Component = "div",
-  className = "",
+  tag: Component = 'div',
+  className = '',
   useFragment = false,
 }) => {
   let CaseItem = null;
 
   if (React.Children.count(children) < 2) {
     throw new SyntaxError(
-      "You must include at least two cases with one marked as default"
+      'You must include at least two cases with one marked as default'
     );
   }
 
@@ -32,7 +32,7 @@ export const Cases = ({
       CaseItem = children[children.length - 1];
     } else if (filteredArrayElement.length > 1) {
       throw new SyntaxError(
-        "You most probably have set the same expressionValue in your Case components"
+        'You most probably have set the same expressionValue in your Case components'
       );
     } else {
       CaseItem = filteredArrayElement;

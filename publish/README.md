@@ -29,7 +29,7 @@ The Repeat component is proving more of a hassle than it should. I have marked i
 it has to tamper the internals of a React component. Since this is quite volatile and bad practice I suggest using the usual .map() for iteration.
 I apologize for any inconvenience.
 
-## v2.2.0 Breaking changes
+## v2.2.0 Breaking changesantoni
 
 - Repeat component has been re-written in order to sort out issues with the key prop
 - Repeat useRandomKeyForIteration has been removed please use setKey as shown in the docs.
@@ -114,7 +114,7 @@ The following components props are available
 #### `<If>` Component
 
 ```jsx
-<If show={true} tag="section" className="custom-class">
+<If show={true} tag='section' className='custom-class'>
   <div>IF</div>
 </If>
 ```
@@ -129,7 +129,7 @@ Available props (see global props as well):
 #### `<Else>` Component
 
 ```jsx
-<Else show={true} tag="section" className="custom-class">
+<Else show={true} tag='section' className='custom-class'>
   <div>ELSE</div>
 </Else>
 ```
@@ -150,13 +150,13 @@ Available props (see global props as well):
 ```jsx
 <Conditional
   condition={TRUTHLY_OR_FALSY_VALUE}
-  tag="div"
-  className="custom-class"
+  tag='div'
+  className='custom-class'
 >
-  <If tag="section" className="custom-class">
+  <If tag='section' className='custom-class'>
     <div>HI CONDITIONAL IF</div>
   </If>
-  <Else tag="section" className="custom-class">
+  <Else tag='section' className='custom-class'>
     <div>HI CONDITIONAL ELSE</div>
   </Else>
 </Conditional>
@@ -173,12 +173,12 @@ Available props (see global props as well):
 #### `<Cases>/<Case>` Component
 
 ```jsx
-<Cases expression={"Jack"} tag="div" className="custom-class">
-  <Case expressionValue={"Jack"}>Hi Jack</Case>
-  <Case expressionValue={"John"}>Hi John</Case>
-  <Case expressionValue={"Jim"}>Hi Jim</Case>
-  <Case expressionValue={"Jason"}>Hi Jason</Case>
-  <Case expressionValue={"default"}>Default</Case>
+<Cases expression={'Jack'} tag='div' className='custom-class'>
+  <Case expressionValue={'Jack'}>Hi Jack</Case>
+  <Case expressionValue={'John'}>Hi John</Case>
+  <Case expressionValue={'Jim'}>Hi Jim</Case>
+  <Case expressionValue={'Jason'}>Hi Jason</Case>
+  <Case expressionValue={'default'}>Default</Case>
 </Cases>
 ```
 

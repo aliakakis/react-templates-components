@@ -8,12 +8,14 @@
     "<THIRD_PARTY_MODULES>",
     "^[.]"
   ],
+  "importOrderTypeScriptVersion": "5.9.3",
   "printWidth": 80,
   "tabWidth": 2,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
   "useTabs": false,
   "semi": true,
-  "singleQuote": false,
-  "trailingComma": "es5",
+  "trailingComma": "all",
   "bracketSpacing": true,
   "arrowParens": "always",
   "endOfLine": "lf"

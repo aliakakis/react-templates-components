@@ -1,1 +1,121 @@
-import{Children as e,Fragment as t,isValidElement as n,useMemo as r}from"react";import{jsx as i,jsxs as a}from"react/jsx-runtime";function o({children:e}){return i(`div`,{style:{backgroundColor:`rgba(243, 244, 246, 0.5)`,padding:`8px`,borderRadius:`4px`,color:`black`},children:e})}function s(e,t){let n=e.length===0,r=e.length>2,a=e.length<2;return n||r||a?i(o,{children:`You must include exactly one If component and one Else component`}):t?e[0]:e[1]}function c({children:n,condition:a=!0,tag:o=`div`,className:c=``,useFragment:l=!1}){let u=l?t:o,d=!l&&{className:c},f=r(()=>e.toArray(n),[n]);return i(u,{...d,children:s(f,a)})}function l({children:e,show:n=!0,tag:r=`div`,className:a=``,useFragment:o=!1}){return n&&i(o?t:r,{...!o&&{className:a},children:e})}function u({children:e,show:n=!0,tag:r=`div`,className:a=``,useFragment:o=!1}){return n&&i(o?t:r,{...!o&&{className:a},children:e})}function d({children:e,tag:n=`div`,className:r=``,useFragment:a=!1}){return i(a?t:n,{...!a&&{className:r},children:e})}function f({children:e}){return e}function p(e,t,n){let r=e.length===0&&t.length===0,s=e.length>1||t.length>1,c=e.length>0,l=t.length>0;return r?a(o,{children:[`No items found for expressionValue: `,i(`strong`,{children:n}),` in Cases component`]}):s?i(o,{children:`You most probably have set the same expressionValue in your Case components`}):c?e:l?t:i(o,{children:`There was an error please check your code`})}function m(e,t){return e.filter(e=>n(e)&&e.props.expressionValue===t)}function h({children:n,expression:a,tag:o=`div`,className:s=``,useFragment:c=!1,defaultExpressionValue:l=`default`}){let u=c?t:o,d=!c&&{className:s},f=r(()=>e.toArray(n),[n]),h=r(()=>m(f,a),[f,a]),g=r(()=>m(f,l),[f,l]);return i(u,{...d,children:p(h,g,a)})}export{f as Case,h as Cases,c as Conditional,u as Else,l as If,d as Repeat};
+import {
+  Children as e,
+  isValidElement as n,
+  useMemo as r,
+  Fragment as t,
+} from 'react';
+import { jsxs as a, jsx as i } from 'react/jsx-runtime';
+
+function o({ children: e }) {
+  return i(`div`, {
+    style: {
+      backgroundColor: `rgba(243, 244, 246, 0.5)`,
+      padding: `8px`,
+      borderRadius: `4px`,
+      color: `black`,
+    },
+    children: e,
+  });
+}
+function s(e, t) {
+  let n = e.length === 0,
+    r = e.length > 2,
+    a = e.length < 2;
+  return n || r || a
+    ? i(o, {
+        children: `You must include exactly one If component and one Else component`,
+      })
+    : t
+      ? e[0]
+      : e[1];
+}
+function c({
+  children: n,
+  condition: a = !0,
+  tag: o = `div`,
+  className: c = ``,
+  useFragment: l = !1,
+}) {
+  let u = l ? t : o,
+    d = !l && { className: c },
+    f = r(() => e.toArray(n), [n]);
+  return i(u, { ...d, children: s(f, a) });
+}
+function l({
+  children: e,
+  show: n = !0,
+  tag: r = `div`,
+  className: a = ``,
+  useFragment: o = !1,
+}) {
+  return n && i(o ? t : r, { ...(!o && { className: a }), children: e });
+}
+function u({
+  children: e,
+  show: n = !0,
+  tag: r = `div`,
+  className: a = ``,
+  useFragment: o = !1,
+}) {
+  return n && i(o ? t : r, { ...(!o && { className: a }), children: e });
+}
+function d({
+  children: e,
+  tag: n = `div`,
+  className: r = ``,
+  useFragment: a = !1,
+}) {
+  return i(a ? t : n, { ...(!a && { className: r }), children: e });
+}
+function f({ children: e }) {
+  return e;
+}
+function p(e, t, n) {
+  let r = e.length === 0 && t.length === 0,
+    s = e.length > 1 || t.length > 1,
+    c = e.length > 0,
+    l = t.length > 0;
+  return r
+    ? a(o, {
+        children: [
+          `No items found for expressionValue: `,
+          i(`strong`, { children: n }),
+          ` in Cases component`,
+        ],
+      })
+    : s
+      ? i(o, {
+          children: `You most probably have set the same expressionValue in your Case components`,
+        })
+      : c
+        ? e
+        : l
+          ? t
+          : i(o, { children: `There was an error please check your code` });
+}
+function m(e, t) {
+  return e.filter((e) => n(e) && e.props.expressionValue === t);
+}
+function h({
+  children: n,
+  expression: a,
+  tag: o = `div`,
+  className: s = ``,
+  useFragment: c = !1,
+  defaultExpressionValue: l = `default`,
+}) {
+  let u = c ? t : o,
+    d = !c && { className: s },
+    f = r(() => e.toArray(n), [n]),
+    h = r(() => m(f, a), [f, a]),
+    g = r(() => m(f, l), [f, l]);
+  return i(u, { ...d, children: p(h, g, a) });
+}
+export {
+  f as Case,
+  h as Cases,
+  c as Conditional,
+  u as Else,
+  l as If,
+  d as Repeat,
+};

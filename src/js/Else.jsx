@@ -1,11 +1,11 @@
-import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 
 export const Else = ({
   children,
   show = true,
-  tag: Component = "div",
-  className = "",
+  tag: Component = 'div',
+  className = '',
   useFragment = false,
 }) => {
   return (
