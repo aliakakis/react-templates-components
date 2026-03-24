@@ -13,7 +13,9 @@ export default defineConfig({
   outDir: 'publish',
   sourcemap: !isProduction,
   minify: isProduction,
-  external: ['react', 'react-dom'],
+  deps: {
+    neverBundle: ['react', 'react-dom'],
+  },
   plugins: [
     useReactCompiler &&
       pluginBabel({
