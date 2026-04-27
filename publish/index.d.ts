@@ -1,5 +1,5 @@
-import { PropsWithChildren, ReactNode } from 'react';
-import * as react_jsx_runtime0 from 'react/jsx-runtime';
+import { PropsWithChildren, ReactNode } from "react";
+import * as react_jsx_runtime0 from "react/jsx-runtime";
 
 //#region src/interfaces/Component.d.ts
 interface RtSharedProps extends PropsWithChildren {
@@ -17,7 +17,7 @@ declare function Conditional({
   condition,
   tag,
   className,
-  useFragment,
+  useFragment
 }: ConditionalProps): react_jsx_runtime0.JSX.Element;
 //#endregion
 //#region src/If.d.ts
@@ -29,7 +29,7 @@ declare function If({
   show,
   tag,
   className,
-  useFragment,
+  useFragment
 }: IfProps): false | react_jsx_runtime0.JSX.Element;
 //#endregion
 //#region src/Else.d.ts
@@ -41,22 +41,29 @@ declare function Else({
   show,
   tag,
   className,
-  useFragment,
+  useFragment
 }: ElseProps): false | react_jsx_runtime0.JSX.Element;
 //#endregion
 //#region src/Repeat.d.ts
+interface RepeatProps<T> extends Omit<RtSharedProps, 'children'> {
+  items: T[];
+  children: (item: T) => ReactNode;
+}
 declare function Repeat({
+  items,
   children,
   tag,
   className,
-  useFragment,
-}: RtSharedProps): react_jsx_runtime0.JSX.Element;
+  useFragment
+}: RepeatProps<unknown>): react_jsx_runtime0.JSX.Element;
 //#endregion
 //#region src/Cases.d.ts
 interface CaseProps extends RtSharedProps {
   expressionValue: string | number;
 }
-declare function Case({ children }: CaseProps): ReactNode;
+declare function Case({
+  children
+}: CaseProps): ReactNode;
 interface CasesProps extends RtSharedProps {
   expression: string | number;
   defaultExpressionValue?: string | number;
@@ -67,7 +74,7 @@ declare function Cases({
   tag,
   className,
   useFragment,
-  defaultExpressionValue,
+  defaultExpressionValue
 }: CasesProps): react_jsx_runtime0.JSX.Element;
 //#endregion
 export { Case, Cases, Conditional, Else, If, Repeat };

@@ -14,6 +14,7 @@
     "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write .",
+    "preBuildChecks": "npm run typecheck && npm run lint && npm run format && npm run test",
     "prepare": "husky",
     "postinstall": "npx playwright install --with-deps chromium"
   },
@@ -60,7 +61,7 @@
     "./package.json": "./package.json"
   },
   "engines": {
-    "node": ">=24.14.0",
-    "npm": ">=11.9.0"
+    "node": ">=24.14.1",
+    "npm": ">=11.11.0"
   }
 }
