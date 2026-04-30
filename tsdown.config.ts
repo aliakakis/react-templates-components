@@ -9,8 +9,7 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   platform: 'neutral',
   dts: true,
-  clean: false,
-  outDir: 'publish',
+  outDir: 'dist',
   sourcemap: !isProduction,
   minify: isProduction,
   deps: {
