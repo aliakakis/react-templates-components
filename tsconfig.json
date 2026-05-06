@@ -9,7 +9,6 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
     "removeComments": true,
-    "baseUrl": ".",
     "target": "esnext",
     "jsx": "react-jsx",
     "lib": ["es2023", "DOM"],

@@ -6,7 +6,7 @@ const useReactCompiler = process.env['USE_REACT_COMPILER'] === 'true';
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['esm', 'cjs'],
+  format: ['esm'],
   platform: 'neutral',
   dts: true,
   outDir: 'dist',
