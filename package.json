@@ -4,50 +4,37 @@
   "description": "Simple template based React Components",
   "type": "module",
   "scripts": {
-    "build": "npm run preBuildChecks && cross-env NODE_ENV=production tsdown",
-    "build:react-compiler": "npm run preBuildChecks && cross-env NODE_ENV=production USE_REACT_COMPILER=true tsdown",
-    "dev": "tsdown",
-    "dev:react-compiler": "cross-env USE_REACT_COMPILER=true tsdown",
-    "play": "vite",
-    "test": "vitest",
+    "build": "npm run preBuildChecks && vp pack",
+    "dev": "vp pack",
+    "play": "vp dev",
+    "test": "vp test",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ./src --ext .ts,.tsx",
+    "lint": "vp lint ./src",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write .",
+    "format": "vp fmt .",
     "preBuildChecks": "npm run typecheck && npm run lint && npm run format && npm run test",
-    "prepare": "husky",
-    "postinstall": "npx playwright install --with-deps chromium"
+    "postinstall": "npx playwright install --with-deps chromium",
+    "prepare": "vp config"
   },
   "dependencies": {
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@eslint/js": "10.0.1",
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
-    "@rollup/plugin-babel": "7.1.0",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "26.6.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitest/browser-playwright": "5.0.4",
-    "babel-plugin-react-compiler": "1.0.0",
-    "cross-env": "10.1.0",
-    "eslint": "10.12.0",
-    "eslint-plugin-react-hooks": "7.1.1",
-    "eslint-plugin-react-refresh": "0.5.7",
     "globals": "17.13.0",
-    "husky": "9.1.7",
-    "lint-staged": "17.6.0",
     "playwright": "1.64.0",
-    "prettier": "3.9.10",
     "stylelint": "^17.16.0",
-    "tsdown": "0.23.1",
     "typescript": "7.0.2",
-    "typescript-eslint": "8.71.1",
-    "vite": "^8.3.4",
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.2.0",
     "vitest": "5.0.4",
-    "vitest-browser-react": "2.3.0"
+    "vitest-browser-react": "2.3.0",
+    "vite-plus": "1.2.0"
   },
   "keywords": [
     "react",
@@ -60,7 +47,18 @@
     "./package.json": "./package.json"
   },
   "engines": {
-    "node": ">=26",
+    "node": ">=24",
     "npm": ">=11"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": ">=11",
+      "onFail": "error"
+    }
+  },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.2.0",
+    "vitest": "5.0.4"
   }
 }

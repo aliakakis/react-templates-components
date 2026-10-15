@@ -34,8 +34,19 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# claude
+.claude
+CLAUDE.md
+.mcp.json
+*.stackdump
+.agents
+skills-lock.json
+.humanlayer
+.ai
+
 # idea
 .idea
 
 .cache/
 
+.vitest/
